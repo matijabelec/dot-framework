@@ -1,9 +1,9 @@
 <?php
 
-Router::set_route('', 'webpage', 'home');
-Router::set_route('index', 'webpage', 'home');
+Router::set_route('', 'homepage', 'index');
+Router::set_route('index', 'homepage', 'index');
 Router::set_route('about', 'webpage', 'about');
-Router::set_route('contact', 'webpage', 'contact');
+Router::set_route('contact/', 'homepage', 'contact');
 
 Router::set_route('story/view', 'webpage', 'contact');
 
