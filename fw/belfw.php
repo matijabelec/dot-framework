@@ -19,6 +19,10 @@ include_once(ROOT_APP.'/config.php');
 include_once(ROOT_FW_LIB.'/loader.php');
 include_once(ROOT_FW_LIB.'/router.php');
 
+include_once(ROOT_FW_LIB.'/interfaces.php');
+
+include_once(ROOT_FW_LIB.'/template.php');
+
 include_once(ROOT_FW_LIB.'/model.php');
 include_once(ROOT_FW_LIB.'/view.php');
 include_once(ROOT_FW_LIB.'/controller.php');
