@@ -6,7 +6,11 @@ class Homepage_controller extends Controller {
     }
     
     public function index() {
-        echo 'oke';
+        echo 'index';
+    }
+    
+    public function index2() {
+        echo 'index2';
     }
 }
 
