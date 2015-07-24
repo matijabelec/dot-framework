@@ -2,11 +2,9 @@
 
 class Controller {
     public $model = null;
-    public $view = null;
     
-    public function __construct($model=null, $view=null) {
+    public function __construct(Model $model=null) {
         $this->model = $model;
-        $this->view = $view;
     }
 }
 

@@ -14,7 +14,13 @@ define('ROOT_MODULES', ROOT_APP.'/modules');
 
 /* include core functionality */
 include_once(ROOT_FW_CONFIG.'/dotfw_config.php');
+include_once(ROOT_APP.'/config.php');
+
 include_once(ROOT_FW_LIB.'/loader.php');
 include_once(ROOT_FW_LIB.'/router.php');
+
+include_once(ROOT_FW_LIB.'/model.php');
+include_once(ROOT_FW_LIB.'/view.php');
+include_once(ROOT_FW_LIB.'/controller.php');
 
 ?>
