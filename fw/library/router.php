@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * name: Router
+ * 
+ * desc: used to start a controller based on route (url) provided
+ * 
+ */
 class Router {
     protected static $routes = array();
     
@@ -7,6 +13,9 @@ class Router {
     protected static $action = null;
     protected static $args = null;
     
+    /* check and find route in self::$routes 
+     * @ret: void
+     */
     protected static function check_route($url) {
         $url = rtrim($url, '/');
         
@@ -104,15 +113,30 @@ class Router {
         return $found;
     }
     
+    /* set new route
+     * @args:
+     *      $url = url of route:
+     *              can be: 1) 'controller' - set new controller and action 
+     *                      2) 'controller/' - set new controller and default 
+     *                                         action (action can be overriden)
+     *                      3) 'controller/action' - set new controller and action
+     * @ret: void
+     */
     public static function set_route($url, $controller, $action=null) {
         if(is_null($action) ) $action = 'index';
         self::$routes[] = array('url'=>$url, 'controller'=>$controller, 'action'=>$action);
     }
     
+    /* run controller or show error if controller not exists
+     * @ret: void
+     */
     public static function run() {
         $url = $_GET['url'];
         
+        // check route
         if(self::check_route($url) == true) {
+            
+            // run controller
             echo '<br>found<br>';
             echo self::$controller . '->' . self::$action;
             if(!is_null(self::$args) ) {
