@@ -1,10 +1,6 @@
 <?php
 
 class Homepage_controller extends Controller {
-    public function __construct() {
-        parent::__construct();
-    }
-    
     public function index($args=null) {
         echo 'homepage->index';
         if(!is_null($args) ) {
