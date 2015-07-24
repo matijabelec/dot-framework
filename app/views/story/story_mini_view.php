@@ -1,13 +1,12 @@
 <?php
 
-class Story_view extends View {
+class Story_mini_view extends View {
     public function show_story() {
         if($this->model) {
             return '
-<div>
-    <h1>' . $this->model->title . '</h1>
+<div style="border: 1px solid #000">
+    <h2>' . $this->model->title . '</h2>
     <p>' . $this->model->desc . '</p>
-    <hr/>
 </div>';
         }
     }

@@ -13,12 +13,6 @@ class Homepage_controller extends Controller {
     }
     
     public function index2($args=null) {
-        Loader::load_model('story/story');
-        Loader::load_view('story/story');
-        Loader::load_view('story/story2');
-        Loader::load_controller('story/story');
-        
-        
         $id = 1;
         if(count($args)>0) {
             $id = $args[0];
@@ -29,18 +23,47 @@ class Homepage_controller extends Controller {
             $id2 = $args[1];
         }
         
-        $model = new Story_model;
-        $controller = new Story_controller($model);
-        $view = new Story_view($model);
-        $view2 = new Story2_view($model);
+        $model = Loader::get_model('story/story');
+        
+        $controller = Loader::get_controller('story/story', $model);
+        
+        $view = Loader::get_view('story/story', $model);
+        $view2 = Loader::get_view('story/story_mini', $model);
+        
+        
+        $page = '';
         
         $controller->set_story_by_id($id);
-        $view->show_story();
-        $view2->show_story();
+        $page .= $view->show_story();
+        $page .= $view2->show_story();
         
         $controller->set_story_by_id($id2);
-        $view->show_story();
-        $view2->show_story();
+        $page .= $view2->show_story();
+        
+        echo $page;
+    }
+    
+    public function index3($args=null) {
+        $model = Loader::get_model('story/story');
+        
+        $controller = Loader::get_controller('story/story', $model);
+        
+        $template = new Template('pagination');
+        $tpl_item = new Template('story/story_mini');
+        $tpl_num = new Template('<span> {@num} </span>', true);
+        
+        Loader::load_view('pagination');
+        $view = new Pagination_view($model, $template, $tpl_item, $tpl_num);
+        
+        
+        $page = 1;
+        if(count($args)>0) {
+            $page = $args[0];
+        }
+        
+        $controller->set_page($page);
+        
+        echo $view->show();
     }
 }
 
