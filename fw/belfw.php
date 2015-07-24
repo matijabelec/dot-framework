@@ -1,5 +1,6 @@
 <?php
 
+/* declare standard paths */
 define('ROOT_FW_CONFIG', ROOT_FW.'/config');
 define('ROOT_FW_LIB', ROOT_FW.'/library');
 
@@ -10,7 +11,10 @@ define('ROOT_TEMPLATES', ROOT_APP.'/templates');
 define('ROOT_LANGS', ROOT_APP.'/langs');
 define('ROOT_MODULES', ROOT_APP.'/modules');
 
+
+/* include core functionality */
 include_once(ROOT_FW_CONFIG.'/dotfw_config.php');
+include_once(ROOT_FW_LIB.'/loader.php');
 include_once(ROOT_FW_LIB.'/router.php');
 
 ?>
