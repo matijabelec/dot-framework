@@ -137,7 +137,8 @@ class Router {
         if(self::check_route($url) == true) {
             // run controller
             if(Loader::load_controller(self::$controller) ) {
-                $c = ucfirst(self::$controller.'_controller');
+                $ce = explode('/', self::$controller);
+                $c = ucfirst($ce[count($ce)-1].'_controller');
                 $a = self::$action;
                 $ar = self::$args;
                 
@@ -149,8 +150,18 @@ class Router {
             }
         }
         
-        // route error
-        echo '<br>error<br>';
+        // route error (404: NOT FOUND)
+        echo '<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Error 404</title>
+</head>
+<body>
+    <h1>Error 404</h1>
+    <p>Page not found.</p>
+</body>
+</html>';
     }
 }
 
