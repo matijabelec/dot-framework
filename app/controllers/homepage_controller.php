@@ -5,12 +5,26 @@ class Homepage_controller extends Controller {
         parent::__construct();
     }
     
-    public function index() {
-        echo 'index';
+    public function index($args=null) {
+        echo 'homepage->index';
+        if(!is_null($args) ) {
+            echo '(';
+            foreach($args as $arg) {
+                echo ' ' . $arg;
+            }
+            echo ' )';
+        }
     }
     
-    public function index2() {
-        echo 'index2';
+    public function index2($args=null) {
+        echo 'homepage->index2';
+        if(!is_null($args) ) {
+            echo '(';
+            foreach($args as $arg) {
+                echo ' ' . $arg;
+            }
+            echo ' )';
+        }
     }
 }
 

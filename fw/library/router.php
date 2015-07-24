@@ -147,18 +147,6 @@ class Router {
                     return;
                 }
             }
-            
-            /*echo '<br>found<br>';
-            echo self::$controller . '->' . self::$action;
-            if(!is_null(self::$args) ) {
-                echo '(';
-                foreach(self::$args as $arg) {
-                    echo ' ' . $arg;
-                }
-                echo ' )';
-            }
-            
-            return;*/
         }
         
         // route error
