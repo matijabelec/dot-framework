@@ -9,10 +9,6 @@ define('ROOT_APP', ROOT.'/app');
 include_once(ROOT_FW.'/belfw.php');
 
 
-/* load app configurations */
-include_once(ROOT_APP.'/config.php');
-
-
 /* run app */
 include_once(ROOT_APP.'/routes.php');
 Router::run();
