@@ -135,9 +135,20 @@ class Router {
         
         // check route
         if(self::check_route($url) == true) {
-            
             // run controller
-            echo '<br>found<br>';
+            if(Loader::load_controller(self::$controller) ) {
+                $c = ucfirst(self::$controller.'_controller');
+                $a = self::$action;
+                $ar = self::$args;
+                
+                $obj = new $c;
+                if(method_exists($obj, $a) && is_callable(array($obj, $a) ) ) {
+                    $obj->$a($ar);
+                    return;
+                }
+            }
+            
+            /*echo '<br>found<br>';
             echo self::$controller . '->' . self::$action;
             if(!is_null(self::$args) ) {
                 echo '(';
@@ -147,7 +158,7 @@ class Router {
                 echo ' )';
             }
             
-            return;
+            return;*/
         }
         
         // route error

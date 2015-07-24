@@ -6,6 +6,7 @@
  * desc: used to load any resource file
  * 
  */
+
 class Loader {
     /* load template file 
      * @ret:
@@ -14,8 +15,8 @@ class Loader {
      *      else:
      *          null
      */
-    public function get_template($template_name) {
-        $filename = ROOT_TEMPLATES . '/' . $template_name . 'php';
+    public static function get_template($template_name) {
+        $filename = ROOT_TEMPLATES . '/' . $template_name . '.tpl';
         if(file_exists($filename) ) {
             return file_get_contents($filename);
         }
@@ -29,8 +30,8 @@ class Loader {
      *      else:
      *          null
      */
-    public function get_langfile($langfile_name) {
-        $filename = ROOT_LANGS . '/' . $langfile_name . 'php';
+    public static function get_langfile($langfile_name) {
+        $filename = ROOT_LANGS . '/' . $langfile_name . '.lang';
         if(file_exists($filename) ) {
             return file_get_contents($filename);
         }
@@ -45,7 +46,7 @@ class Loader {
      *          false
      */
     public static function load_controller($controller_name) {
-        $filename = ROOT_CONTROLLERS . '/' . $controller_name . 'php';
+        $filename = ROOT_CONTROLLERS . '/' . $controller_name . '_controller.php';
         if(file_exists($filename) ) {
             include_once($filename);
             return true;
@@ -61,7 +62,7 @@ class Loader {
      *          false
      */
     public static function load_model($model_name) {
-        $filename = ROOT_MODELS . '/' . $model_name . 'php';
+        $filename = ROOT_MODELS . '/' . $model_name . '_model.php';
         if(file_exists($filename) ) {
             include_once($filename);
             return true;
@@ -77,7 +78,7 @@ class Loader {
      *          false
      */
     public static function load_view($view_name) {
-        $filename = ROOT_VIEWS . '/' . $view_name . 'php';
+        $filename = ROOT_VIEWS . '/' . $view_name . '_view.php';
         if(file_exists($filename) ) {
             include_once($filename);
             return true;
@@ -92,8 +93,8 @@ class Loader {
      *      else:
      *          false
      */
-     public static function load_view($module_name) {
-        $filename = ROOT_MODULES . '/' . $module_name . 'php';
+     public static function load_module($module_name) {
+        $filename = ROOT_MODULES . '/' . $module_name . '.php';
         if(file_exists($filename) ) {
             include_once($filename);
             return true;
