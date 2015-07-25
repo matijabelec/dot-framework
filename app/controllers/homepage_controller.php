@@ -8,7 +8,7 @@ class Homepage_controller extends Controller {
         $template = new Template('story/story_list');
         $template->set('title', 'Test title');
         $tpl_item = new Template('story/story_mini');
-        $tpl_num = new Template(' <a href="{@ROOT}/contact/index/{@num}">{@num}</a> ', true);
+        $tpl_num = new Template(' <a href="{@ROOT}/index/index/{@num}">{@num}</a> ', true);
         $tpl_num->set('ROOT', WEB_ROOT);
         $view = new Pagination_view($model, $template, $tpl_item, $tpl_num);
         
