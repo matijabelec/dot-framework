@@ -4,7 +4,7 @@ class Webpage_view {
     private $model;
     private $template;
     
-    public function __construct(Webpage $model, Template $template) {
+    public function __construct(iWebpage $model, Template $template) {
         $this->model = $model;
         $this->template = $template;
     }
@@ -19,6 +19,7 @@ class Webpage_view {
                 $this->template->set($k, $v);
         }
         
+        $this->template->fill(false, true);
         $this->template->fill();
         return $this->template->output();
     }
