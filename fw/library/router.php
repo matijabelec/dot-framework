@@ -163,6 +163,18 @@ class Router {
 </body>
 </html>';
     }
+    
+    public static function redirect($url, $relative=true) {
+        if($relative)
+            $url = ROOT . $url;
+        
+        if(headers_sent() ) {
+            die('<script type="text/javascript">window.location=\'' . $url . '\';</script>');
+        } else {
+            header('Location: ' . $url);
+            die();
+        }
+    }
 }
 
 ?>

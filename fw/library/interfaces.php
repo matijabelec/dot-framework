@@ -18,4 +18,10 @@ interface Searchable {
     public function set_criteria($criteria);
 }
 
+interface Webpage {
+    public function add_data($key, $val);
+    public function get_data();
+}
+
+
 ?>

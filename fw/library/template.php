@@ -12,6 +12,8 @@ class Template {
      */
     protected $values = array();
     
+    private $safe;
+    
     protected function process_includes() {
         $string = $this->data;
         $pattern = '/\{#include\(([a-zA-Z0-9-\/]*)\)\}/i'; /*{#include(region/nav)}*/
@@ -31,6 +33,9 @@ class Template {
     }
     
     public function __construct($name, $inline=false) {
+        $this->set('ROOT', WEB_ROOT);
+        $this->set('SITE', WEB_SITE);
+        
         if($inline != false) {
             $this->data = $name;
         } else {
@@ -60,15 +65,18 @@ class Template {
         return null;
     }
     
-    public function fill() {
+    public function fill($safe=true) {
+        $this->safe = $safe;
         $string = $this->data;
         $pattern = '/\{\@([a-zA-Z0-9-]*)\}/i'; /*{@key}*/
         $this->filled_data = preg_replace_callback(
             $pattern,
             function($matches) {
                 $value = $this->get($matches[1]);
-                if(is_null($value) )
-                    return '';
+                if(is_null($value) ) {
+                    $v = ($this->safe==true ? '' : $matches[0]);
+                    return $v;
+                }
                 return $value;
             },
             $string
