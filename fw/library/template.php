@@ -65,7 +65,7 @@ class Template {
         return null;
     }
     
-    public function fill($safe=true) {
+    public function fill($safe=true, $rewrite=false) {
         $this->safe = $safe;
         $string = $this->data;
         $pattern = '/\{\@([a-zA-Z0-9-]*)\}/i'; /*{@key}*/
@@ -81,6 +81,10 @@ class Template {
             },
             $string
         );
+        
+        if($rewrite!=false) {
+            $this->data = $this->filled_data;
+        }
     }
     
     public function output() {
