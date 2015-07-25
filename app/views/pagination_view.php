@@ -3,17 +3,11 @@
 class Pagination_view {
     private $model;
     private $template;
-    private $template_item;
-    private $template_num;
     
     public function __construct(iPageable $model,
-                                Template $tpl_page,
-                                Template $tpl_item,
-                                Template $tpl_pnum=null) {
+                                Template $template) {
         $this->model = $model;
-        $this->template = $tpl_page;
-        $this->template_item = $tpl_item;
-        $this->template_num = $tpl_pnum;
+        $this->template = $template;
     }
     
     public function show() {
