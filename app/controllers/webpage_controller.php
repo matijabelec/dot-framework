@@ -1,6 +1,10 @@
 <?php
 
-class Webpage_controller extends Controller {
+class Webpage_controller {
+    private $model;
+    private $template;
+    private $view;
+    
     public function add_css() {
         
     }
@@ -15,13 +19,19 @@ class Webpage_controller extends Controller {
         }
     }
     
-    protected function show_webpage($page_mdl, $content) {
+    public function set_template($tpl_name) {
+        $this->model = new Webpage_model();
+        $this->template = new Template($tpl_name);
+        $this->view = new Webpage_view($this->model, $this->template);
+    }
+    
+    protected function show_webpage($template, $content) {
         $page_ctrl = new Webpage_controller($page_mdl);
         $page_ctrl->add_data('content', $content);
         
         $page_tpl = new Template('page');
         $page_view = new Webpage_view($page_mdl, $page_tpl);
-        echo $page_view->show();
+        echo $this->view->show();
     }
 }
 

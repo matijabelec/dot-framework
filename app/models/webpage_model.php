@@ -1,9 +1,9 @@
 <?php
 
-class Webpage_model extends Model implements Webpage {
+class Webpage_model extends Model implements iWebpage {
     private $data;
     
-    public function __construct(Array $data=null) {
+    public function __construct(array $data=null) {
         if(!is_null($data) )
             $this->data = $data;
     }
