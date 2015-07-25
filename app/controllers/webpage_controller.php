@@ -5,32 +5,62 @@ class Webpage_controller {
     private $template;
     private $view;
     
-    public function add_css() {
-        
+    private $meta_data = '';
+    private $css_data = '';
+    private $js_data = '';
+    
+    protected function prepare($template_name) {
+        $this->model = new Webpage_model;
+        $this->template = new Template($template_name);
+        $this->view = new Webpage_view($this->model, $this->template);
     }
     
-    public function add_js() {
+    protected function add_css($css_filename, $inline=false) {
+        if(!isset($css_filename) )
+            return;
         
+        if($inline == false) {
+            $this->css_data .= '
+<link rel="stylesheet" href="' . SITE_CSS . '/' . $css_filename . '.css">';
+        } else {
+            $this->css_data .= '
+    <style>' . $css_filename . '</style>';
+        }
     }
     
-    public function add_data($key, $val) {
+    protected function add_meta($key, $val) {
+        if(isset($key) && isset($val) )
+            $this->meta_data .= '
+<meta name="' . $key . '" content="' . $val . '">';
+    }
+    
+    protected function add_js($js_filename, $inline=false) {
+        if(!isset($js_filename) )
+            return;
+        
+        if($inline == false) {
+            $this->js_data .= '
+<script src="' . SITE_JS . '/' . $js_filename . '.js"></script>';
+        } else {
+            $this->js_data .= '
+<script>' . $js_filename . '</script>';
+        }
+    }
+    
+    protected function add_data($key, $val) {
         if($this->model) {
             $this->model->add_data($key, $val);
         }
     }
     
-    public function set_template($tpl_name) {
-        $this->model = new Webpage_model();
-        $this->template = new Template($tpl_name);
-        $this->view = new Webpage_view($this->model, $this->template);
+    protected function set_title($title) {
+        $this->template->set('title', $title);
     }
     
-    protected function show_webpage($template, $content) {
-        $page_ctrl = new Webpage_controller($page_mdl);
-        $page_ctrl->add_data('content', $content);
-        
-        $page_tpl = new Template('page');
-        $page_view = new Webpage_view($page_mdl, $page_tpl);
+    protected function show() {
+        $this->template->set('CSS-DATA', $this->css_data);
+        $this->template->set('META-DATA', $this->meta_data);
+        $this->template->set('JS-DATA', $this->js_data);
         echo $this->view->show();
     }
 }
