@@ -90,6 +90,38 @@ class Template {
     public function output() {
         return $this->filled_data;
     }
+    
+    
+    
+    private static $merge_i;
+    public static function merge(Template $template, $n) {
+        if(isset($n) && is_numeric($n) && $n>0) {
+            self::$merge_i = 1;
+            $out = '';
+            $string = $template->output();
+            $pattern = '/\{\@([a-zA-Z0-9-]*)\}/i'; /*{@key}*/
+            for($i=1; $i<=$n; $i++) {
+                $data = preg_replace_callback(
+                    $pattern,
+                    function($matches) {
+                        switch($matches[1]) {
+                            case 'ROOT':
+                            case 'SITE':
+                                return $matches[0];
+                            default:
+                                $v = '{@' .  $matches[1] . '-' . self::$merge_i . '}';
+                                return $v;
+                        }
+                    },
+                    $string
+                );
+                $out .= $data;
+                self::$merge_i++;
+            }
+            return $out;
+        }
+        return null;
+    }
 }
 
 ?>
