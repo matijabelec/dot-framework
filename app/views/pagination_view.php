@@ -6,7 +6,7 @@ class Pagination_view {
     private $template_item;
     private $template_num;
     
-    public function __construct(Pageable $model,
+    public function __construct(iPageable $model,
                                 Template $tpl_page,
                                 Template $tpl_item,
                                 Template $tpl_pnum=null) {
@@ -29,32 +29,19 @@ class Pagination_view {
         
         $items = $this->model->get_items($items_per_page, ($current_page-1)*$items_per_page);
         
-        $ps = '';
-        if(isset($this->template_num) ) {
-            for($i=1; $i<=$pages_num; $i++) {
-                $this->template_num->set('num', $i);
-                $this->template_num->fill();
-                $ps .= $this->template_num->output();
-            }
-        } else {
-            for($i=1; $i<=$pages_num; $i++) {
-                $ps .= $i;
-            }
+        for($i=1; $i<=$pages_num; $i++) {
+            $this->template->set('num-'.$i, $i);
         }
-        $this->template->set('pages', $ps);
         
-        $is = '';
+        $i = 1;
         foreach($items as $item) {
             if(is_array($item) ) {
                 foreach($item as $k=>$v) {
-                    $this->template_item->set($k, $v);
+                    $this->template->set($k.'-'.$i, $v);
                 }
-                $this->template_item->fill();
-                $is .= $this->template_item->output();
             }
+            $i++;
         }
-        
-        $this->template->set('items', $is);
         
         $this->template->fill();
         return $this->template->output();

@@ -2,36 +2,47 @@
 
 class Homepage_controller extends Controller {
     public function index($args=null) {
-        $model = new Story_model;
-        $controller = new Story_controller($model);
-        
-        $template = new Template('story/story_list');
-        $template->set('title', 'Test title');
-        $tpl_item = new Template('story/story_mini');
-        $tpl_num = new Template(' <a href="{@ROOT}/index/index/{@num}">{@num}</a> ', true);
-        $tpl_num->set('ROOT', WEB_ROOT);
-        $view = new Pagination_view($model, $template, $tpl_item, $tpl_num);
-        
         $page = 1;
         if(count($args)>0) {
             $page = $args[0];
         }
         
-        $controller->set_page($page);
-        $cnt = $view->show();
+        $model = new Story_model;
+        $model->set_page($page);
         
         
-        $page_mdl = new Home_model;
-        $this->show_webpage($page_mdl, $cnt);
-    }
-    
-    protected function show_webpage($page_mdl, $content) {
-        $page_ctrl = new Webpage_controller($page_mdl);
-        $page_ctrl->add_data('content', $content);
         
-        $page_tpl = new Template('page');
-        $page_view = new Webpage_view($page_mdl, $page_tpl);
-        echo $page_view->show();
+        $tpl = new Template('story/story_list');
+        $tpl->set('title', 'Test title');
+        $tpl->fill(false, true);
+        
+        $tpl_item = new Template('story/story_mini');
+        $ni = $model->get_current_page_items_count();
+        $items = '';
+        for($i=1; $i<=$ni; $i++) {
+            $tpl_item->set_data(array('id'=>'{@id-'.$i.'}',
+                                 'title'=>'{@title-'.$i.'}',
+                                 'text'=>'{@text-'.$i.'}') );
+            $tpl_item->fill();
+            $items .= $tpl_item->output();
+        }
+        $tpl->set('items', $items);
+        
+        
+        $tpl_num = new Template(' <a href="{@ROOT}/home/page/{@num}">{@num}</a> ', true);
+        $np = $model->get_pages_count();
+        $pages = '';
+        for($i=1; $i<=$np; $i++) {
+            $tpl_num->set_data(array('num'=>'{@num-'.$i.'}') );
+            $tpl_num->fill();
+            $pages .= $tpl_num->output();
+        }
+        $tpl->set('pages', $pages);
+        $tpl->fill(false, true);
+        
+        
+        $view = new Pagination_view($model, $tpl, $tpl_item, $tpl_num);
+        echo $view->show();
     }
 }
 
