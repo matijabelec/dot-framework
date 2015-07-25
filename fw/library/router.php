@@ -166,7 +166,7 @@ class Router {
     
     public static function redirect($url, $relative=true) {
         if($relative)
-            $url = ROOT . $url;
+            $url = WEB_ROOT . $url;
         
         if(headers_sent() ) {
             die('<script type="text/javascript">window.location=\'' . $url . '\';</script>');
