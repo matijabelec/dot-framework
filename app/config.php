@@ -1,7 +1,7 @@
 <?php
 
 define('WEB_ROOT', '/dot-framework');
-define('WEB_SITE', '/site');
+define('WEB_SITE', WEB_ROOT . '/site');
 
 define('SITE_CSS', WEB_SITE.'/css');
 define('SITE_JS', WEB_SITE.'/js');
