@@ -1,7 +1,6 @@
 <div>
-    <h1>{@title}</h1>
-    <div>
+    <div class="items_container">
         {@items}
     </div>
-    <p>{@pages}</p>
+    <div class="pages_container">{@pages}</div>
 </div>
