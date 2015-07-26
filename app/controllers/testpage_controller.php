@@ -14,14 +14,39 @@ class Testpage_controller extends Webpage_controller {
         $item2 = $model->get_item();
         $model->set_criteria('sel', array('id'=>4) );
         $item3 = $model->get_item();
-        $tpl_item->
+        
         $tpl_item->set_data($item1, 1);
         $tpl_item->set_data($item2, 2);
         $tpl_item->set_data($item3, 3);
         
         $items = $tpl_item->output();
-        $tpl->
+        
         $tpl->set('content-center', $items);
+        
+        $model->set_criteria('sel', array('id'=>15) );
+        $item4 = $model->get_item();
+        
+        $tpl_item->repeat(1);
+        $tpl_item->set_data($item4);
+        $item_only = $tpl_item->output();
+        
+        
+        $tpl->set('content-right', $item_only);
+        
+        
+        
+        $tpl_nav = new Template('story/story_mini');
+        $tpl_nav->repeat(2);
+        $tpl_nav->set('title', 'st1', 1);
+        $tpl_nav->set('title', 'st2', 2);
+        
+        $tpl->include_template('content-left', $tpl_nav);
+        
+        
+        $tp = $tpl->get_template('content-left');
+        if(!is_null($tp) ) {
+            $tp->repeat(1);
+        }
         
         echo $tpl->output();
     }
