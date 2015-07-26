@@ -1,0 +1,36 @@
+body {
+    
+}
+
+header,
+footer,
+nav,
+main{
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.col2-left-container,
+.col2-right-container,
+.col3-left-container,
+.col3-center-container,
+.col3-right-container{
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    vertical-align: top;
+}
+
+.col2-left-container,
+.col2-right-container{
+    width: 50%;
+}
+
+.col3-center-container{
+    width: 40%;
+}
+.col3-left-container,
+.col3-right-container{
+    width: 30%;
+}
