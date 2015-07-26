@@ -16,7 +16,7 @@ class Testpage_controller extends Webpage_controller {
         $this->set_title('Test');
     }
     
-    public function index($args) {
+    public function index() {
         $this->prepare('page/2-col');
         
         $this->set_defaults();
@@ -26,10 +26,17 @@ class Testpage_controller extends Webpage_controller {
         
         $story_list = new Storypage_controller();
         
-        $stories_left = $story_list->get_story(12);
-        $stories_left .= $story_list->get_story(15);
+        ob_start();
+            $story_list->view(12);
+            $story_list->view(15);
+            
+            $stories_left = ob_get_contents();
+        ob_end_clean();
         
-        $stories_right = $story_list->get_page(3);
+        ob_start();
+            $story_list->page(3);
+            $stories_right = ob_get_contents();
+        ob_end_clean();
         
         $this->add_data('content-left', $stories_left);
         $this->add_data('content-right', $stories_right);
@@ -37,7 +44,7 @@ class Testpage_controller extends Webpage_controller {
         $this->show();
     }
     
-    public function about($args) {
+    public function about() {
         $this->prepare('page/3-col');
         
         $this->set_defaults();
@@ -48,15 +55,25 @@ class Testpage_controller extends Webpage_controller {
         
         $story_list = new Storypage_controller();
         
-        $stories_left = $story_list->get_page(1);
-        $stories_left .= $story_list->get_page(2);
-        $stories_left .= $story_list->get_page(3);
-        $stories_left .= $story_list->get_page(4);
+        ob_start();
+            $story_list->page(1);
+            $story_list->page(2);
+            $story_list->page(3);
+            $story_list->page(4);
+            
+            $stories_left = ob_get_contents();
+        ob_end_clean();
         
-        $stories_center = $story_list->get_page(5);
-        $stories_center .= $story_list->get_page(6);
+        ob_start();
+            $story_list->page(5);
+            $story_list->page(6);
+            $stories_center = ob_get_contents();
+        ob_end_clean();
         
-        $stories_right = $story_list->get_page(7);
+        ob_start();
+            $story_list->page(7);
+            $stories_right = ob_get_contents();
+        ob_end_clean();
         
         
         $this->add_data('content-left', $stories_left);
