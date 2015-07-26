@@ -1,9 +1,6 @@
 <nav>
-    <!-- TEST DATA - START -->
     <ul>
-        <li><a href="{@ROOT}/test">Home</a></li>
-        <li><a href="{@ROOT}/test/about">About</a></li>
+        <li><a href="{@ROOT}/test">{@nav-home}</a></li>
+        <li><a href="{@ROOT}/test/about">{@nav-about}</a></li>
     </ul>
-    <!-- TEST DATA - END -->
-    {@nav}
 </nav>
