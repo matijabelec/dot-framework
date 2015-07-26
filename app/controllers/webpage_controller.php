@@ -9,7 +9,11 @@ class Webpage_controller {
     private $css_data = '';
     private $js_data = '';
     
+    private $lang = 'en';
+    
     protected function prepare($template_name) {
+        $this->lang = Lang_controller::get();
+        
         $this->model = new Webpage_model;
         $this->template = new Template($template_name);
         $this->view = new Webpage_view($this->model, $this->template);
@@ -58,16 +62,34 @@ class Webpage_controller {
     
     protected function set_title($title) {
         if(isset($title) )
-            $this->template->set('title', $title);
+            $this->template->set('main-page-title', $title);
     }
     
     
     
     protected function add_data($key, $val) {
         if($this->model) {
-            if(isset($key) && isset($val) )
-                $this->model->add_data($key, $val);
+            $this->model->add_data($key, $val);
         }
+    }
+    
+    
+    protected function add_langfile($langfile, $lang=null) {
+        if($this->model) {
+            if(is_null($lang) )
+                $lang = $this->lang;
+            return $this->model->load_lang_data($langfile, $lang);
+        }
+        return false;
+    }
+    
+    
+    protected function set_lang($lang) {
+        if(isset($lang) )
+            $this->lang = $lang;
+    }
+    protected function get_lang($lang) {
+        return $this->lang;
     }
     
     
@@ -75,6 +97,9 @@ class Webpage_controller {
         $this->template->set('CSS-DATA', $this->css_data);
         $this->template->set('META-DATA', $this->meta_data);
         $this->template->set('JS-DATA', $this->js_data);
+        
+        $this->add_langfile('region/nav', $this->lang);
+        
         echo $this->view->show();
     }
 }

@@ -48,7 +48,7 @@ class Testpage_controller extends Webpage_controller {
         $this->prepare('page/3-col');
         
         $this->set_defaults();
-        $this->set_title('Test - about');
+        $this->add_langfile('page/test');
         
         $this->add_css('col-tpl-styles');
         
