@@ -33,10 +33,30 @@ class Loader {
      *      else:
      *          null
      */
-    public static function get_langfile($langfile_name) {
+    public static function get_langfile($langfile_name, $lang) {
         $filename = ROOT_LANGS . '/' . $langfile_name . '.lang';
         if(file_exists($filename) ) {
-            return file_get_contents($filename);
+            $ret = array();
+            $xml = simplexml_load_file($filename);
+            foreach($xml->children() as $child) {
+                    $id = $child->attributes();
+                    $id = (string)$id->id;
+                    $v = '?';
+                    $first = true;
+                    foreach($child as $key => $value) {
+                        $l = $value->attributes();
+                        if($l == $lang) {
+                            $v = (string)$value;
+                            break;
+                        }
+                        if($first) {
+                            $v = (string)$value;
+                            $first = false;
+                        }
+                    }
+                    $ret[$id] = $v;
+            }
+            return $ret;
         }
         return null;
     }
