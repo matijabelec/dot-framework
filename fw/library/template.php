@@ -14,6 +14,12 @@
  * @license    Proprietary
  */
 
+/**
+ * An template class
+ *
+ * Template class is used for loading template files and it is used
+ * in Dot-framework.
+ */
 class Template {
     private $template;
     private $data;
@@ -106,7 +112,7 @@ class Template {
      * @access public
      */
     public function repeat($n) {
-        if(isset($n) && is_numeric($n) && $n>1) {
+        if(isset($n) && is_numeric($n) && $n>0) {
             $this->n = $n;
         }
     }
@@ -125,7 +131,7 @@ class Template {
      */
     public function output($safe=true) {
         $string = $this->template;
-        $pattern = '/\{\@([a-zA-Z0-9-]*)\}/i'; //{@key}
+        $pattern = '/\{\@([a-zA-Z0-9-\/]*)\}/i'; //{@key}
         
         if($safe == true) {
             $filled = preg_replace_callback(
@@ -199,14 +205,22 @@ class Template {
      * @return string the filled template.
      * @access public
      */
-    public function include_template($key, Template $template, $arr_n=1) {
+    public function include_template($key, Template &$template, $arr_id=1) {
         if(isset($key) && isset($template) ) {
             $a = &$this->data[$arr_id];
             $a[$key] = array('type'=>'template', 'template'=>&$template);
         }
     }
     
-    
+    /**
+     * Method used in constructor for hardcode load of templates in template
+     * 
+     * Method searches for all includes in original template on load of 
+     * template. Includes in template is set as {#include(name)} where 'name'
+     * is a template's name.
+     * 
+     * @access private
+     */
     private function process_hardcode_includes() {
         $string = $this->template;
         $pattern = '/\{#include\(([a-zA-Z0-9-\/]*)\)\}/i'; //{#include(region/nav)}
@@ -223,6 +237,19 @@ class Template {
         );
     }
     
+    /**
+     * Method returns value for key
+     * 
+     * Method used for retriveing of value for chosen key.
+     * 
+     * @param string    $arg1 an key in template
+     * @param int    $arg2 used if repeat() function is called to set template
+     *                  on n-th template in copies
+     * 
+     * @return string the value of key (if template then template returns output).
+     *                      returns NULL if key not exists
+     * @access private
+     */
     private function filled_data($key, $arr_id=1) {
         if(isset($key) && isset($this->data[$arr_id]) ) {
             $a = &$this->data[$arr_id];
@@ -236,6 +263,35 @@ class Template {
             }
         }
         return null;
+    }
+    
+    /**
+     * Method returns template if value of key is template or returns null
+     * 
+     * Method used for retriveing of value for chosen key. It returns
+     * template or null.
+     * 
+     * @param string    $arg1 an key in template
+     * @param int    $arg2 used if repeat() function is called to get value
+     *                  on n-th template in copies
+     * 
+     * @return &mixed the value of key if template (returns &Template). Else,
+     *                  returns null.
+     * @access public
+     */
+    public function &get_template($key, $arr_id=1) {
+        if(isset($key) && isset($this->data[$arr_id]) ) {
+            $a = &$this->data[$arr_id];
+            if(isset($a[$key]) ) {
+                $item = &$a[$key];
+                switch($item['type']) {
+                    case 'template': return $item['template'];
+                    default: break;
+                }
+            }
+        }
+        global $null_guard;
+        return $null_guard;
     }
 }
 
