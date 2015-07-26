@@ -144,8 +144,17 @@ class Router {
                 
                 $obj = new $c;
                 if(method_exists($obj, $a) && is_callable(array($obj, $a) ) ) {
-                    $obj->$a($ar);
-                    return;
+                    ob_start();
+                    
+                    $status = $obj->$a($ar);
+                    
+                    $preview = ob_get_contents();
+                    ob_end_clean();
+                    
+                    if(!isset($status) || $status != STATUS_ERR) {
+                        echo $preview;
+                        return;
+                    }
                 }
             }
         }

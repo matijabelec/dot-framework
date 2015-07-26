@@ -12,6 +12,13 @@ define('ROOT_LANGS', ROOT_APP.'/langs');
 define('ROOT_MODULES', ROOT_APP.'/modules');
 
 
+
+/* standard webpage return codes in controller */
+define('STATUS_OK', 1);
+define('STATUS_ERR', -1);
+
+
+
 /* include core functionality */
 include_once(ROOT_FW_CONFIG.'/dotfw_config.php');
 include_once(ROOT_APP.'/config.php');
