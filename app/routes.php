@@ -1,5 +1,7 @@
 <?php
 
+Session::start();
+
 Router::set_route('', 'homepage', 'index');
 Router::set_route('index', 'homepage', 'index');
 
@@ -8,5 +10,7 @@ Router::set_route('story/view', 'storypage', 'view');
 Router::set_route('story', 'storypage', 'index');
 
 Router::set_route('test/', 'testpage', 'index');
+
+Router::set_route('lang', 'lang', 'set');
 
 ?>

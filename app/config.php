@@ -13,6 +13,10 @@ define('DFW_DB_HOSTNAME', 'localhost');
 define('DFW_DB_USERNAME', 'root');
 define('DFW_DB_PASSWORD', 'belec');
 
+/*** lang ***/
+define('DEFAULT_LANG', 'en');
+
+/*** error reporting ***/
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
