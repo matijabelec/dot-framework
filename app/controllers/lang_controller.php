@@ -7,10 +7,15 @@ class Lang_controller extends Controller {
                 case 'en': 
                 case 'hr': 
                     Session::set('lang', $lang);
-                    //if(isset())
-                    //Redirect($redir_url);
+                    
+                    $ret = Url::get('ret');
+                    if(!is_null($ret) ) {
+                        Router::redirect($ret);
+                    }
+                    
                     return STATUS_OK;
                     break;
+                    
                 default:
                     break;
             }
