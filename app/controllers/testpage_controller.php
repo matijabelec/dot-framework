@@ -18,6 +18,7 @@ class Testpage_controller extends Webpage_controller {
     
     public function index() {
         $this->prepare('page/2-col');
+        $this->add_data('nav-lang-retlink', '/test');
         
         $this->set_defaults();
         $this->set_title('Test - home');
@@ -46,6 +47,7 @@ class Testpage_controller extends Webpage_controller {
     
     public function about() {
         $this->prepare('page/3-col');
+        $this->add_data('nav-lang-retlink', '/test/about');
         
         $this->set_defaults();
         $this->add_langfile('page/test');

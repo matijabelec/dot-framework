@@ -5,7 +5,7 @@
     </ul>
     
     <ul class="nav-langselect-container">
-        <li><a href="{@ROOT}/lang/en?ret=/test">en</a></li>
-        <li><a href="{@ROOT}/lang/hr?ret=/test">hr</a></li>
+        <li><a href="{@ROOT}/lang/en?ret={@nav-lang-retlink}">en</a></li>
+        <li><a href="{@ROOT}/lang/hr?ret={@nav-lang-retlink}">hr</a></li>
     </ul>
 </nav>
