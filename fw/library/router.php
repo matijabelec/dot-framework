@@ -144,9 +144,22 @@ class Router {
                 
                 $obj = new $c;
                 if(method_exists($obj, $a) && is_callable(array($obj, $a) ) ) {
+                    $status = STATUS_ERR;
+                    
                     ob_start();
                     
-                    $status = $obj->$a($ar);
+                    $ReflectionFoo = new ReflectionClass($c);
+                    $ar_valid_num = $ReflectionFoo->getMethod($a)->getNumberOfParameters();
+                    
+                    if(is_null($ar) ) {
+                        if($ar_valid_num==0) {
+                            $status = $obj->$a();
+                            //$status = call_user_func_array(array($obj, $a), array() );
+                        }
+                    } else {
+                        if($ar_valid_num>0 && $ar>=$ar_valid_num)
+                            $status = call_user_func_array(array($obj, $a), $ar);
+                    }
                     
                     $preview = ob_get_contents();
                     ob_end_clean();
