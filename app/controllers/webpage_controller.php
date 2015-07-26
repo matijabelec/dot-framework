@@ -28,7 +28,16 @@ class Webpage_controller {
         }
     }
     
-    protected function add_meta($key, $val) {
+    protected function add_meta($key, $val, $fulltag=false) {
+        if($fulltag != false) {
+            if(isset($val) ) {
+                $this->meta_data .= '
+<meta ' . $val . '>';
+            }
+            
+            return;
+        }
+        
         if(isset($key) && isset($val) )
             $this->meta_data .= '
 <meta name="' . $key . '" content="' . $val . '">';
@@ -47,15 +56,20 @@ class Webpage_controller {
         }
     }
     
+    protected function set_title($title) {
+        if(isset($title) )
+            $this->template->set('title', $title);
+    }
+    
+    
+    
     protected function add_data($key, $val) {
         if($this->model) {
-            $this->model->add_data($key, $val);
+            if(isset($key) && isset($val) )
+                $this->model->add_data($key, $val);
         }
     }
     
-    protected function set_title($title) {
-        $this->template->set('title', $title);
-    }
     
     protected function show() {
         $this->template->set('CSS-DATA', $this->css_data);

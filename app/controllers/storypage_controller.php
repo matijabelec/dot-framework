@@ -2,41 +2,48 @@
 
 class Storypage_controller extends Controller {
     public function index($args) {
+        if(count($args) == 0)
+            Router::redirect('/story/page/1');
+        
+        return STATUS_ERR;
+    }
+    
+    public function page($args) {
         if(count($args)>0) {
             $page = $args[0];
         } else {
             Router::redirect('/story/page/1');
         }
         
-        // story list
-        $stories_container = $this->get_stories_container($page);
-        
-        echo $stories_container;
+        // show story list
+        echo $this->get_page($page);
     }
-    private function get_stories_container($page) {
-        $model = new Story_model;
-        $model->set_page($page);
-        
-        $tpl = new Template('story/story_list');
-        $tpl_item = new Template('story/story_mini');
-        $tpl_num = new Template(' <a {@curr-num} href="{@ROOT}/story/page/{@num}">{@num}</a> ', true);
-        //$tpl->set('page-current', 'class="selected"');
-        $view = new Pagination_view($model, $tpl);
-        $view->set_template('items', $tpl_item);
-        $view->set_template('pages', $tpl_num);
-        
-        $stories_container = '<style>a{color: #ff0000;text-decoration: none;} .selected{color: #000000;}</style>';
-        $stories_container .= $view->show();
-        
-        unset($view);
-        unset($model);
-        unset($tpl);
-        unset($tpl_item);
-        unset($tpl_num);
-        
-        return $stories_container;
+    public function get_page($page) {
+        if(isset($page) && is_numeric($page) ) {
+            $model = new Story_model;
+            $model->set_page($page);
+            
+            $tpl = new Template('story/story_list');
+            $tpl_item = new Template('story/story_mini');
+            $tpl_num = new Template(' <a {@curr-num} href="{@ROOT}/story/page/{@num}">{@num}</a> ', true);
+            //$tpl->set('page-current', 'class="selected"');
+            $view = new Pagination_view($model, $tpl);
+            $view->set_template('items', $tpl_item);
+            $view->set_template('pages', $tpl_num);
+            
+            $stories_container = '<style>a{color: #ff0000;text-decoration: none;} .selected{color: #000000;}</style>';
+            $stories_container .= $view->show();
+            
+            unset($view);
+            unset($model);
+            unset($tpl);
+            unset($tpl_item);
+            unset($tpl_num);
+            
+            return $stories_container;
+        }
+        return '';
     }
-    
     
     
     
@@ -48,7 +55,7 @@ class Storypage_controller extends Controller {
         
         echo $story;
     }
-    private function get_story($id) {
+    public function get_story($id) {
         $model = new Story_model;
         $model->set_criteria('sel', array('id'=>$id) );
         
