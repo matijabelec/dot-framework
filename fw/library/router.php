@@ -136,12 +136,12 @@ class Router {
         // check route
         if(self::check_route($url) == true) {
             // run controller
-            if(Loader::load_controller(self::$controller) ) {
-                $ce = explode('/', self::$controller);
-                $c = ucfirst($ce[count($ce)-1].'_controller');
-                $a = self::$action;
-                $ar = self::$args;
-                
+            $ce = explode('/', self::$controller);
+            $c = ucfirst($ce[count($ce)-1].'_controller');
+            $a = self::$action;
+            $ar = self::$args;
+            
+            if(class_exists($c) ) {
                 $obj = new $c;
                 if(method_exists($obj, $a) && is_callable(array($obj, $a) ) ) {
                     $status = STATUS_ERR;
