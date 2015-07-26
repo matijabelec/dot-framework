@@ -24,6 +24,7 @@ include_once(ROOT_FW_CONFIG.'/dotfw_config.php');
 include_once(ROOT_APP.'/config.php');
 
 include_once(ROOT_FW_LIB.'/loader.php');
+include_once(ROOT_FW_LIB.'/url.php');
 include_once(ROOT_FW_LIB.'/router.php');
 include_once(ROOT_FW_LIB.'/session.php');
 
@@ -38,7 +39,7 @@ include_once(ROOT_FW_LIB.'/controller.php');
 
 
 
-/* autoloader */
+/*** autoloader ***/
 function the_autoloader($class) {
     $class = '/' . strtolower($class) . '.php';
     
@@ -51,6 +52,29 @@ function the_autoloader($class) {
     $filename = ROOT_VIEWS . $class;
     if(file_exists($filename) ) { include_once($filename); return; }
 }
-spl_autoload_register('the_autoloader');
+
+
+/*** clean POST, GET and URL ***/
+function unregister_globals() {
+    if(ini_get('register_globals') ) {
+        $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
+        foreach ($array as $value)
+            foreach($GLOBALS[$value] as $key => $var)
+                if($var === $GLOBALS[$key])
+                    unset($GLOBALS[$key]);
+    }
+}
+
+function strip_slashes_deep($value) {
+    $value = is_array($value) ? array_map('strip_slashes_deep', $value) : stripslashes($value);
+    return $value;
+}
+function remove_mq() {
+    if(get_magic_quotes_gpc() ) {
+        $_GET = strip_slashes_deep($_GET);
+        $_POST = strip_slashes_deep($_POST);
+        $_COOKIE = strip_slashes_deep($_COOKIE);
+    }
+}
 
 ?>
