@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <item id="nav-home">
+        <value lang="en">Home</value>
+        <value lang="hr">Početna</value>
+    </item>
+    
+    <item id="nav-projects">
+        <value lang="en">Projects</value>
+        <value lang="hr">Projekti</value>
+    </item>
+    
+    <item id="nav-about">
+        <value lang="en">Impressum</value>
+        <value lang="hr">Impressum</value>
+    </item>
+</data>
