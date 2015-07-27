@@ -41,6 +41,8 @@ class Template {
      */
     public function __construct($name, $inline=false) {
         $this->template = '';
+        $this->data = array();
+        $this->n = 1;
         
         if(isset($name) ) {
             if($inline != false) {
@@ -49,13 +51,24 @@ class Template {
                 $this->template = Loader::get_template($name);
             }
             if(isset($this->template) ) {
-                $this->process_hardcode_includes();
+                //$this->process_hardcode_includes();
+                
+                $string = $this->template;
+                $pattern = '/\{#include\(([a-zA-Z0-9-\/]*)\)\}/i'; //{#include(region/nav)}
+                $this->template = preg_replace_callback(
+                    $pattern,
+                    function($matches) {
+                        $value = $matches[1];
+                        $key = 'template-' . $value;
+                        
+                        $tpl = new Template($value);
+                        $this->include_template($key, $tpl);
+                        return '{@' . $key . '}';
+                    },
+                    $string
+                );
             }
         }
-        
-        $this->data = array();
-        
-        $this->n = 1;
     }
     
     /**
@@ -122,14 +135,18 @@ class Template {
      * 
      * Method output fills n copies of template and returns filled template string
      * 
-     * @param bool    $arg1 an true/false value. if true than all {@key} found
+     * @param bool    $arg1 an true/false value. If true then all {@key} found
      *                      in template but not in data will be replaced with
      *                      empty string or, if false, key will be left intact
+     * @param bool    $arg2 an true/false value. If true then template is baked
+     *                      two times (first time only keys are replaced, second
+     *                      keys in values are replaced). Use this argument when
+     *                      values contains keys
      * 
      * @return string the filled template.
      * @access public
      */
-    public function output($safe=true) {
+    public function output($safe=true, $force_rewrite=false) {
         $string = $this->template;
         $pattern = '/\{\@([a-zA-Z0-9-\/]*)\}/i'; //{@key}
         
@@ -186,6 +203,20 @@ class Template {
                     $string
                 );
             }
+        }
+        
+        if($force_rewrite!=false) {
+            $filled = preg_replace_callback(
+                $pattern,
+                function($matches) {
+                    $value = $this->filled_data($matches[1]);
+                    if(is_null($value) ) {
+                        return '';
+                    }
+                    return $value;
+                },
+                $filled
+            );
         }
         
         return $filled;
@@ -257,7 +288,7 @@ class Template {
                 $item = &$a[$key];
                 switch($item['type']) {
                     case 'value': return $item['value'];
-                    case 'template': return $item['template']->output();
+                    case 'template': return $item['template']->output(false);
                     default: break;
                 }
             }
@@ -286,6 +317,35 @@ class Template {
                 $item = &$a[$key];
                 switch($item['type']) {
                     case 'template': return $item['template'];
+                    default: break;
+                }
+            }
+        }
+        global $null_guard;
+        return $null_guard;
+    }
+    
+    /**
+     * Method returns value of key or returns null
+     * 
+     * Method used for retriveing of value for chosen key. It returns
+     * string or null.
+     * 
+     * @param string    $arg1 an key in template
+     * @param int    $arg2 used if repeat() function is called to get value
+     *                  on n-th template in copies
+     * 
+     * @return mixed the value of key if template (returns &Template). Else,
+     *                  returns null.
+     * @access public
+     */
+    public function &get_value($key, $arr_id=1) {
+        if(isset($key) && isset($this->data[$arr_id]) ) {
+            $a = &$this->data[$arr_id];
+            if(isset($a[$key]) ) {
+                $item = &$a[$key];
+                switch($item['type']) {
+                    case 'value': return $item['value'];
                     default: break;
                 }
             }
