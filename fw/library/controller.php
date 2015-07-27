@@ -19,13 +19,6 @@
  *
  * Controller class is used for all controllers used in framework.
  */
-class Controller {
-    /**
-     * Constructor
-     *
-     * Default constructor.
-     */
-    public function __construct() {}
-}
+class Controller {}
 
 ?>

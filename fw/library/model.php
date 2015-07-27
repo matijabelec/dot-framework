@@ -19,13 +19,6 @@
  *
  * Model class is used for all models used in framework.
  */
-class Model {
-    /**
-     * Constructor
-     *
-     * Default constructor.
-     */
-    public function __construct() {}
-}
+class Model {}
 
 ?>

@@ -20,27 +20,8 @@
  * View class is used for all views used in framework.
  */
 class View {
-    /**
-     * The model for view
-     *
-     * Possible values are: Model or null. Model is set in constructor.
-     *
-     * @var Model
-     * @access private
-     */
-    private $model;
-    
-    /**
-     * Constructor for view
-     *
-     * Constructor sets default model for view.
-     * 
-     * @param Model    $arg1 an model for view or null if no model required
-     * 
-     * @access public
-     */
-    public function __construct(Model &$model=null) {
-        $this->model = $model;
+    public function output() {
+        return '';
     }
 }
 

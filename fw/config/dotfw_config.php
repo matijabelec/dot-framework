@@ -30,6 +30,11 @@ define('ROOT_MODELS', ROOT_APP.'/models');
 define('ROOT_VIEWS', ROOT_APP.'/views');
 
 /**
+ * Standard path for app/helpers
+ */
+define('ROOT_HELPERS', ROOT_APP.'/helpers');
+
+/**
  * Standard path for app/templates
  */
 define('ROOT_TEMPLATES', ROOT_APP.'/templates');
