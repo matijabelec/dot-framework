@@ -34,7 +34,6 @@ class Testpage_controller extends Webpage_controller {
         $tpl->set('content-right', $item_only);
         
         
-        
         $tpl_nav = new Template('story/story_mini');
         $tpl_nav->repeat(2);
         $tpl_nav->set('title', 'st1', 1);
@@ -42,128 +41,48 @@ class Testpage_controller extends Webpage_controller {
         
         $tpl->include_template('content-left', $tpl_nav);
         
-        
-        $tp = $tpl->get_template('content-left');
+        $tp = &$tpl->get_template('content-left');
         if(!is_null($tp) ) {
             $tp->repeat(1);
         }
         
-        echo $tpl->output();
+        echo $tpl->output(true, true);
     }
     
-    /*protected function set_defaults() {
-        $this->add_meta('keywords', 'CV,matijabelec,personal webpage');
-        $this->add_meta('description', 'Matija Belec\'s CV');
-        $this->add_meta('author', 'Matija Belec');
-        //$this->add_meta('', 'http-equiv="refresh" content="30"', true);
+    public function pagination($page) {
+        if(!isset($page) && !is_numeric($page) )
+            $page = 1;
         
-        $this->add_css('test');
-        $this->add_css('test2');
+        $model = new Story_model;
+        $model->set_page($page);
         
-        $this->add_js('test');
-        $this->add_js('test2');
+        $template = new Template('pagination');
+        $tpl = new Template('story/story_mini');
+        $tpl2 = new Template(' <a {@curr-num} href="{@ROOT}/story/page/{@num}">{@num}</a> ', true);
         
-        $this->set_title('Test');
-    }
-    
-    public function index() {
-        $this->prepare('page/2-col');
-        $this->add_data('nav-lang-retlink', '/test');
+        $template->include_template('items', $tpl);
+        $template->include_template('pages', $tpl2);
+        $template->set('page-current', 'class="selected"');
         
-        $this->set_defaults();
-        $this->set_title('Test - home');
-        
-        $this->add_css('col-tpl-styles');
-        
-        $story_list = new Storypage_controller();
-        
-        ob_start();
-            $story_list->view(12);
-            $story_list->view(15);
-            
-            $stories_left = ob_get_contents();
-        ob_end_clean();
-        
-        ob_start();
-            $story_list->page(3);
-            $stories_right = ob_get_contents();
-        ob_end_clean();
-        
-        $this->add_data('content-left', $stories_left);
-        $this->add_data('content-right', $stories_right);
-        
-        $this->show();
-    }
-    
-    public function about() {
-        $this->prepare('page/3-col');
-        $this->add_data('nav-lang-retlink', '/test/about');
-        
-        $this->set_defaults();
-        $this->add_langfile('page/test');
-        
-        $this->add_css('col-tpl-styles');
-        
-        
-        $story_list = new Storypage_controller();
-        
-        ob_start();
-            $story_list->page(1);
-            $story_list->page(2);
-            $story_list->page(3);
-            $story_list->page(4);
-            
-            $stories_left = ob_get_contents();
-        ob_end_clean();
-        
-        ob_start();
-            $story_list->page(5);
-            $story_list->page(6);
-            $stories_center = ob_get_contents();
-        ob_end_clean();
-        
-        ob_start();
-            $story_list->page(7);
-            $stories_right = ob_get_contents();
-        ob_end_clean();
-        
-        
-        $this->add_data('content-left', $stories_left);
-        $this->add_data('content-center', $stories_center);
-        $this->add_data('content-right', $stories_right);
-        
-        $this->show();
+        $view = new Pagination_view($model, $template);
+        echo $view->output();
     }
     
     public function region() {
-        $this->prepare('page/1-col');
-        $this->add_data('nav-lang-retlink', '/test/region');
-        
-        $this->set_defaults();
-        $this->add_langfile('page/test');
-        
-        $this->add_css('col-tpl-styles');
-        
-        
         $model = new Story_model;
-        $model->set_criteria('sel', array('id'=>1) );
+        $model->set_criteria('sel', array('id'=>6) );
         
         $template = new Template('
 <div class="region">
-{@item}
+{@content}
 </div>', true);
         $template_item = new Template('story/story_full');
-        $region_view = new Region_view($model, $template, $template_item);
-        $region_view2 = new Region_view($model, $template, $template_item);
+        $template->include_template('content', $template_item);
         
-        $page = $region_view->output();
-        $page .= $region_view2->output();
+        $region_view = new Region_view($model, $template);
         
-        
-        $this->add_data('content', $page);
-        
-        $this->show();
-    }*/
+        echo $region_view->output();
+    }
 }
 
 ?>
