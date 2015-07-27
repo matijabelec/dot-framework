@@ -18,7 +18,6 @@
  * 
  * Used to start a controller based on route (url) provided. It 
  * has method for redirect (method redirect() ).
- * 
  */
 class Router {
     /**
@@ -65,7 +64,7 @@ class Router {
     /**
      * Private constructor because class is static
      * 
-     * This private constructor prevents instantiation this class.
+     * This private constructor prevents instantiation of this class.
      * 
      * @access private
      */
