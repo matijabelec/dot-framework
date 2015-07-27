@@ -3,7 +3,7 @@
 /**
  * Template class used for templates in Dot-framework
  *
- * Template class used for templates in Dot-framework
+ * Template class used for templates in framework.
  *
  * PHP version 5
  *
@@ -21,25 +21,66 @@
  * in Dot-framework.
  */
 class Template {
+    /**
+     * The string which represents template
+     *
+     * It set from constructor.
+     *
+     * @var string
+     * @access private
+     */
     private $template;
+    
+    /**
+     * The array of data used to fill template
+     *
+     * All data which is set in this var is used in method output() to
+     * fill in a template string.
+     *
+     * @var array
+     * @access private
+     */
     private $data;
+    
+    /**
+     * The number of copies of template used
+     *
+     * It can have value in range from 1 to N. It is set to 1 if method 
+     * repeat is not used or to N if it is used.
+     *
+     * @var int
+     * @access private
+     */
     private $n;
+    
+    /**
+     * The current id_number of template used in processing
+     *
+     * It is used when processing an template if template has more copies.
+     *
+     * @var int
+     * @access private
+     */
     private $curr_n;
     
     /**
      * Constructor for template
      * 
      * Set template string (load string from file) or set string inline.
+     * Template data can be sent on construct. Data is sent as an array of 
+     * key=>value pairs: array([key=>value] [ , key=>value] [, ...]) and
+     * it can be used with values that are string.
      * 
      * @param string    $arg1 an string for name of template, or template 
      *                      string itself
-     * @param bool    $arg2 if inline is set to false then name is template 
+     * @param array    $arg2 an data which is set on template load
+     * @param bool    $arg3 if inline is set to false then name is template 
      *                      name, or, if inline is set to true, than name is
      *                      template string
      * 
      * @access public
      */
-    public function __construct($name, $inline=false) {
+    public function __construct($name, $default_data=null, $inline=false) {
         $this->template = '';
         $this->data = array();
         $this->n = 1;
@@ -67,6 +108,12 @@ class Template {
                     },
                     $string
                 );
+            }
+            
+            if(!is_null($default_data) && is_array($default_data) ) {
+                foreach($default_data as $key=>$val) {
+                    $this->set($key, $val);
+                }
             }
         }
     }
@@ -355,4 +402,18 @@ class Template {
     }
 }
 
-?>
+?><?php
+
+/**
+ * Template class used for templates in Dot-framework
+ *
+ * Template class used for templates in Dot-framework
+ *
+ * PHP version 5
+ *
+ * LICENSE: 
+ *
+ * @author     Matija Belec <matijabelec1@gmail.com>
+ * @copyright  2015 Matija Belec
+ * @license    Proprietary
+ */
