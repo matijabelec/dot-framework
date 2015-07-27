@@ -1,25 +1,50 @@
 <?php
 
-/* declare standard paths */
+/**
+ * Main init file for Dot-framework
+ *
+ * File includes all core functionaly of framework. It is
+ * main point of init file of framework.
+ *
+ * PHP version 5
+ *
+ * LICENSE: 
+ *
+ * @author     Matija Belec <matijabelec1@gmail.com>
+ * @copyright  2015 Matija Belec
+ * @license    Proprietary
+ */
+
+/*
+ * declare standard paths
+ */
+
+/**
+ * Standard path for fw/config
+ */
 define('ROOT_FW_CONFIG', ROOT_FW.'/config');
+
+/**
+ * Standard path for fw/lib
+ */
 define('ROOT_FW_LIB', ROOT_FW.'/library');
 
-define('ROOT_CONTROLLERS', ROOT_APP.'/controllers');
-define('ROOT_MODELS', ROOT_APP.'/models');
-define('ROOT_VIEWS', ROOT_APP.'/views');
-define('ROOT_TEMPLATES', ROOT_APP.'/templates');
-define('ROOT_LANGS', ROOT_APP.'/langs');
-define('ROOT_MODULES', ROOT_APP.'/modules');
 
-
-
-/* standard webpage return codes in controller */
+/**
+ * Controller's methods return this if they succeed
+ */
 define('STATUS_OK', 1);
+
+/**
+ * Controller's methods return this if they NOT succeed
+ */
 define('STATUS_ERR', -1);
 
 
 
-/* include core functionality */
+/*
+ * include all core functionality of dot-framework
+ */
 include_once(ROOT_FW_CONFIG.'/dotfw_config.php');
 include_once(ROOT_APP.'/config.php');
 
@@ -38,8 +63,15 @@ include_once(ROOT_FW_LIB.'/view.php');
 include_once(ROOT_FW_LIB.'/controller.php');
 
 
-
-/*** autoloader ***/
+/**
+ * Autoloader function for classes
+ * 
+ * Autoloader function is capable of loading controller class, 
+ * model class or view class from ROOT_CONTROLLERS or ROOT_MODELS 
+ * or ROOT_VIEWS directory.
+ * 
+ * @param string $arg1 a class name
+ */
 function the_autoloader($class) {
     $class = '/' . strtolower($class) . '.php';
     
@@ -53,8 +85,11 @@ function the_autoloader($class) {
     if(file_exists($filename) ) { include_once($filename); return; }
 }
 
-
-/*** clean POST, GET and URL ***/
+/**
+ * Used for unregister globals
+ * 
+ * This function traverse all globals and unset their values
+ */
 function unregister_globals() {
     if(ini_get('register_globals') ) {
         $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
@@ -65,10 +100,27 @@ function unregister_globals() {
     }
 }
 
+/**
+ * Function used to strip slashes in all $value values
+ * 
+ * If $value is array then function is called on any value in
+ * that array.
+ * 
+ * @param mixed $arg1 an value (string or array)
+ * 
+ * @return mixed returned cleaned value
+ */
 function strip_slashes_deep($value) {
     $value = is_array($value) ? array_map('strip_slashes_deep', $value) : stripslashes($value);
     return $value;
 }
+
+/**
+ * Function used to remove 'magic quotes'
+ * 
+ * Function removes 'magic quotes' in all $_GET,
+ * $_POST or $_COOKIE data.
+ */
 function remove_mq() {
     if(get_magic_quotes_gpc() ) {
         $_GET = strip_slashes_deep($_GET);
