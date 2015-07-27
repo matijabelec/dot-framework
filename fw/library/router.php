@@ -141,6 +141,8 @@ class Router {
                 $c = ucfirst($ce[count($ce)-1].'_controller');
                 $a = self::$action;
                 $ar = self::$args;
+                if(is_null($ar) )
+                    $ar = array();
                 
                 if(class_exists($c) ) {
                     $obj = new $c;
@@ -150,17 +152,16 @@ class Router {
                         ob_start();
                         
                         $ReflectionFoo = new ReflectionClass($c);
-                        $ar_valid_num = $ReflectionFoo->getMethod($a)->getNumberOfParameters();
+                        $ar_valid_num = $ReflectionFoo->getMethod($a)->getNumberOfRequiredParameters();
+                        $ar_max_num = $ReflectionFoo->getMethod($a)->getNumberOfParameters();
+                        $ar_cnt = count($ar);
                         
-                        if(is_null($ar) ) {
-                            if($ar_valid_num==0) {
+                        if($ar_cnt == 0) {
+                            if($ar_valid_num == 0) {
                                 $status = $obj->$a();
-                                //$status = call_user_func_array(array($obj, $a), array() );
                             }
-                        } else {
-                            if($ar_valid_num>0 && $ar>=$ar_valid_num)
+                        } else if($ar_cnt>=$ar_valid_num && $ar_cnt<=$ar_max_num)
                                 $status = call_user_func_array(array($obj, $a), $ar);
-                        }
                         
                         $preview = ob_get_contents();
                         ob_end_clean();
