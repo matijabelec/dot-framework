@@ -1,6 +1,6 @@
 <?php
 
-class Pagination_story_view {
+class Pagination_story_view extends View {
     private $view;
     
     public function __construct(iPageable $model) {

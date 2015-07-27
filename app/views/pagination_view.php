@@ -1,6 +1,6 @@
 <?php
 
-class Pagination_view {
+class Pagination_view extends View {
     private $model;
     private $template;
     

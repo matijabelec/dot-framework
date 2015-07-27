@@ -1,6 +1,8 @@
 <?php
 
 class Story_model extends Model implements iListable, iPageable {
+    const CRITERIA_SELECT_BY_ID = 'sel';
+    
     private $page;
     private $query;
     

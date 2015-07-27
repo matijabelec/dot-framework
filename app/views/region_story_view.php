@@ -1,6 +1,6 @@
 <?php
 
-class Region_story_view {
+class Region_story_view extends View {
     private $view;
     
     public function __construct(iListable $model) {

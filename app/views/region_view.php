@@ -1,6 +1,6 @@
 <?php
 
-class Region_view {
+class Region_view extends View {
     private $model;
     private $template;
     
