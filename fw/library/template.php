@@ -196,20 +196,10 @@ class Template {
     public function output($safe=true, $force_rewrite=false) {
         $string = $this->template;
         $pattern = '/\{\@([a-zA-Z0-9-\/]*)\}/i'; //{@key}
+        $filled = '';
         
         if($safe == true) {
-            $filled = preg_replace_callback(
-                $pattern,
-                function($matches) {
-                    $value = $this->filled_data($matches[1]);
-                    if(is_null($value) ) {
-                        return '';
-                    }
-                    return $value;
-                },
-                $string
-            );
-            for($i=2; $i<=$this->n; $i++) {
+            for($i=1; $i<=$this->n; $i++) {
                 $this->curr_n = $i;
                 $filled .= preg_replace_callback(
                     $pattern,
@@ -224,26 +214,15 @@ class Template {
                 );
             }
         } else {
-            $filled = preg_replace_callback(
-                $pattern,
-                function($matches) {
-                    $value = $this->filled_data($matches[1]);
-                    if(is_null($value) ) {
-                        $v = $matches[0];
-                        return $v;
-                    }
-                    return $value;
-                },
-                $string
-            );
-            for($i=2; $i<=$this->n; $i++) {
+            for($i=1; $i<=$this->n; $i++) {
                 $this->curr_n = $i;
                 $filled .= preg_replace_callback(
                     $pattern,
                     function($matches) {
                         $value = $this->filled_data($matches[1], $this->curr_n);
                         if(is_null($value) ) {
-                            return '';
+                            $v = $matches[0];
+                            return $v;
                         }
                         return $value;
                     },
