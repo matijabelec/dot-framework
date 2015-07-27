@@ -55,4 +55,10 @@ define('ROOT_MODULES', ROOT_APP.'/modules');
  */
 $null_guard = null;
 
+/**
+ * Global variable used for autoload function to determine paths
+ * @global array $GLOBALS['include_paths']
+ */
+$include_paths = array();
+
 ?>

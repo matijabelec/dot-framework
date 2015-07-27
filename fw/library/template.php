@@ -85,6 +85,9 @@ class Template {
         $this->data = array();
         $this->n = 1;
         
+        $this->set('ROOT', WEB_ROOT);
+        $this->set('SITE', WEB_SITE);
+        
         if(isset($name) ) {
             if($inline != false) {
                 $this->template = $name;

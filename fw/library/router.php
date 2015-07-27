@@ -225,22 +225,28 @@ class Router {
                     if(method_exists($obj, $a) && is_callable(array($obj, $a) ) ) {
                         $status = STATUS_ERR;
                         
-                        ob_start();
+                        $ok = true;
+                        if(strlen($a) >= 2 && $a[0] == '_' && $a[1] == '_')
+                            $ok = false;
                         
-                        $ReflectionFoo = new ReflectionClass($c);
-                        $ar_valid_num = $ReflectionFoo->getMethod($a)->getNumberOfRequiredParameters();
-                        $ar_max_num = $ReflectionFoo->getMethod($a)->getNumberOfParameters();
-                        $ar_cnt = count($ar);
-                        
-                        if($ar_cnt == 0) {
-                            if($ar_valid_num == 0) {
-                                $status = $obj->$a();
-                            }
-                        } else if($ar_cnt>=$ar_valid_num && $ar_cnt<=$ar_max_num)
+                        if($ok) {
+                            ob_start();
+                            
+                            $ReflectionFoo = new ReflectionClass($c);
+                            $ar_valid_num = $ReflectionFoo->getMethod($a)->getNumberOfRequiredParameters();
+                            $ar_max_num = $ReflectionFoo->getMethod($a)->getNumberOfParameters();
+                            $ar_cnt = count($ar);
+                            
+                            if($ar_cnt == 0) {
+                                if($ar_valid_num == 0) {
+                                    $status = $obj->$a();
+                                }
+                            } else if($ar_cnt>=$ar_valid_num && $ar_cnt<=$ar_max_num)
                                 $status = call_user_func_array(array($obj, $a), $ar);
-                        
-                        $preview = ob_get_contents();
-                        ob_end_clean();
+                            
+                            $preview = ob_get_contents();
+                            ob_end_clean();
+                        }
                         
                         if(!isset($status) || $status != STATUS_ERR) {
                             echo $preview;

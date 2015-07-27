@@ -71,22 +71,47 @@ include_once(ROOT_FW_LIB.'/controller.php');
  * @param string $arg1 a class name
  */
 function the_autoloader($class) {
+    global $include_paths; 
     $class = '/' . strtolower($class) . '.php';
     
-    $filename = ROOT_CONTROLLERS . $class;
-    if(file_exists($filename) ) { include_once($filename); return; }
+    /*$filename = ROOT_CONTROLLERS . $class;
+    if(file_exists($filename) ) { include_once($filename); return; }*/
+    foreach($include_paths['controllers'] as $path) {
+        $filename = ROOT_CONTROLLERS . $path . $class;
+        if(file_exists($filename) ) { include_once($filename); return; }
+    }
     
-    $filename = ROOT_MODELS . $class;
-    if(file_exists($filename) ) { include_once($filename); return; }
     
-    $filename = ROOT_VIEWS . $class;
-    if(file_exists($filename) ) { include_once($filename); return; }
+    /*$filename = ROOT_MODELS . $class;
+    if(file_exists($filename) ) { include_once($filename); return; }*/
+    foreach($include_paths['models'] as $path) {
+        $filename = ROOT_MODELS . $path . $class;
+        if(file_exists($filename) ) { include_once($filename); return; }
+    }
     
-    $filename = ROOT_HELPERS . $class;
-    if(file_exists($filename) ) { include_once($filename); return; }
     
-    $filename = ROOT_MODULES . $class;
-    if(file_exists($filename) ) { include_once($filename); return; }
+    /*$filename = ROOT_VIEWS . $class;
+    if(file_exists($filename) ) { include_once($filename); return; }*/
+    foreach($include_paths['views'] as $path) {
+        $filename = ROOT_VIEWS . $path . $class;
+        if(file_exists($filename) ) { include_once($filename); return; }
+    }
+    
+    
+    /*$filename = ROOT_HELPERS . $class;
+    if(file_exists($filename) ) { include_once($filename); return; }*/
+    foreach($include_paths['helpers'] as $path) {
+        $filename = ROOT_HELPERS . $path . $class;
+        if(file_exists($filename) ) { include_once($filename); return; }
+    }
+    
+    
+    /*$filename = ROOT_MODULES . $class;
+    if(file_exists($filename) ) { include_once($filename); return; }*/
+    foreach($include_paths['modules'] as $path) {
+        $filename = ROOT_MODULES . $path . $class;
+        if(file_exists($filename) ) { include_once($filename); return; }
+    }
 }
 
 /**

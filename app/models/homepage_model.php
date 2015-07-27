@@ -1,14 +1,18 @@
 <?php
 
-class Webpage_model implements iWebpage {
+class Homepage_model implements iWebpage {
+    private $lang = 'en';
     private $data = array();
     
-    public function get_data() {
-        return $this->data;
+    public function __construct($lang) {
+        if(isset($lang) )
+            $this->lang = $lang;
     }
-    public function set_data($key, $value) {
-        if(isset($key) && isset($value) )
-            $this->data[$key] = $value;
+    
+    public function get_data() {
+        $this->data['nav-lang-retlink'] = '/';
+        $this->load_lang_data('page/test', $this->lang);
+        return $this->data;
     }
     
     public function load_lang_data($langfile, $lang) {

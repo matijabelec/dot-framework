@@ -27,4 +27,28 @@ define('DEFAULT_LANG', 'en');
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+
+/*** paths for class-autoloader function ***/
+$include_paths = array( 
+    'controllers' => array('', 
+        '/article', 
+        '/page',
+        '/region'
+),
+    'models' => array('', 
+        '/article', 
+        '/region'
+),
+    'views' => array('', 
+        '/article', 
+        '/region'
+),
+    'helpers' => array('', 
+        '/region'
+),
+    'modules' => array(''
+)
+);
+
+
 ?>
