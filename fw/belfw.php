@@ -66,9 +66,7 @@ include_once(ROOT_FW_LIB.'/controller.php');
 /**
  * Autoloader function for classes
  * 
- * Autoloader function is capable of loading controller class, 
- * model class or view class from ROOT_CONTROLLERS or ROOT_MODELS 
- * or ROOT_VIEWS directory.
+ * Autoloader function is capable of loading classes from /app/ directory.
  * 
  * @param string $arg1 a class name
  */
@@ -82,6 +80,12 @@ function the_autoloader($class) {
     if(file_exists($filename) ) { include_once($filename); return; }
     
     $filename = ROOT_VIEWS . $class;
+    if(file_exists($filename) ) { include_once($filename); return; }
+    
+    $filename = ROOT_HELPERS . $class;
+    if(file_exists($filename) ) { include_once($filename); return; }
+    
+    $filename = ROOT_MODULES . $class;
     if(file_exists($filename) ) { include_once($filename); return; }
 }
 
