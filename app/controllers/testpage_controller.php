@@ -1,6 +1,6 @@
 <?php
 
-class Testpage_controller extends Webpage_controller {
+class Testpage_controller extends Controller {
     public function index() {
         $tpl = new Template('page/3-col', array('ROOT'=>WEB_ROOT) );
         
@@ -51,7 +51,7 @@ class Testpage_controller extends Webpage_controller {
     }
     
     public function pagination($page=1) {
-        if(!isset($page) && !is_numeric($page) )
+        if(!is_numeric($page) || $page<1)
             $page = 1;
         
         $model = new Story_model;
@@ -59,18 +59,21 @@ class Testpage_controller extends Webpage_controller {
         
         $template = new Template('pagination');
         $tpl = new Template('story/story_mini');
-        $tpl2 = new Template(' <a {@curr-num} href="{@ROOT}/test/pagination/{@num}">{@num}</a> ', true);
+        $tpl2 = new Template(' <a {@curr-num} href="{@ROOT}/test/pagination/{@num}">{@num}</a> ', null, true);
         
         $template->include_template('items', $tpl);
         $template->include_template('pages', $tpl2);
         $template->set('page-current', 'class="selected"');
+        $template->set('ROOT', WEB_ROOT);
+        $template->set('SITE', WEB_SITE);
+        $template->set('story-link', '/test/region');
         
         $view = new Pagination_view($model, $template);
         echo $view->output();
     }
     
-    public function region($id) {
-        if(!isset($id) || is_numeric($id) || $id<1) {
+    public function region($id=1) {
+        if(!is_numeric($id) || $id<1) {
             $id = 1;
         }
         
@@ -80,12 +83,11 @@ class Testpage_controller extends Webpage_controller {
         $template = new Template('
 <div class="region">
 {@content}
-</div>', true);
+</div>', null, true);
         $template_item = new Template('story/story_full');
         $template->include_template('content', $template_item);
         
         $region_view = new Region_view($model, $template);
-        
         echo $region_view->output();
     }
 }

@@ -18,7 +18,7 @@ class Region_view {
             $tpl->set_data($data);
         }
         
-        return $this->template->output();
+        return $this->template->output(true, true);
     }
 }
 
