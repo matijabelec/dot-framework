@@ -1,22 +1,87 @@
 <?php
+/**
+ * Router class used for routing in Dot-framework
+ *
+ * Router class used for routing in framework.
+ *
+ * PHP version 5
+ *
+ * LICENSE: 
+ *
+ * @author     Matija Belec <matijabelec1@gmail.com>
+ * @copyright  2015 Matija Belec
+ * @license    Proprietary
+ */
 
 /**
- * name: Router
+ * Router class used for routing in Dot-framework
  * 
- * desc: used to start a controller based on route (url) provided
+ * Used to start a controller based on route (url) provided. It 
+ * has method for redirect (method redirect() ).
  * 
  */
 class Router {
-    protected static $routes = array();
-    
-    protected static $controller = null;
-    protected static $action = null;
-    protected static $args = null;
-    
-    /* check and find route in self::$routes 
-     * @ret: void
+    /**
+     * Routes list
+     *
+     * In this list all routes is stored. Router can route any of
+     * this routes or if route not found - shows errorpage.
+     *
+     * @var array
+     * @access private
      */
-    protected static function check_route($url) {
+    private static $routes = array();
+    
+    /**
+     * Controller name
+     *
+     * Can have this values: string representing name of class or null.
+     *
+     * @var string
+     * @access private
+     */
+    private static $controller = null;
+    
+    /**
+     * Action name
+     *
+     * Can have this values: string representing method name or null.
+     *
+     * @var string
+     * @access private
+     */
+    private static $action = null;
+    
+    /**
+     * Arguments list
+     *
+     * Can have this values: array of arguments or null.
+     *
+     * @var array
+     * @access private
+     */
+    private static $args = null;
+    
+    /**
+     * Private constructor because class is static
+     * 
+     * This private constructor prevents instantiation this class.
+     * 
+     * @access private
+     */
+    private function __construct() {}
+    
+    /**
+     * Checking if route is in routes list
+     * 
+     * This method is used to determine if route exists.
+     * 
+     * @param string    $arg1 an string representing route.
+     * 
+     * @return bool the status of route (true if found, false if not).
+     * @access private
+     */
+    private static function check_route($url) {
         $url = rtrim($url, '/');
         
         $url_el = explode('/', $url);
@@ -113,22 +178,34 @@ class Router {
         return $found;
     }
     
-    /* set new route
-     * @args:
-     *      $url = url of route:
-     *              can be: 1) 'controller' - set new controller and action 
-     *                      2) 'controller/' - set new controller and default 
-     *                                         action (action can be overriden)
-     *                      3) 'controller/action' - set new controller and action
-     * @ret: void
+    /**
+     * Used to set a new route
+     * 
+     * This method is used to set new route. Route url can be any of this:
+     *   1) 'controller' - set new controller and action 
+     *   2) 'controller/' - set new controller and default action (action can be 
+     *                      overriden)
+     *   3) 'controller/action' - set new controller and action
+     * 
+     * @param string    $arg1 an string representing route.
+     * @param string    $arg2 an string representing controller name.
+     * @param string    $arg3 an string representing action name if null then
+     *                          action will be set to 'index'.
+     * 
+     * @access public
      */
     public static function set_route($url, $controller, $action=null) {
         if(is_null($action) ) $action = 'index';
         self::$routes[] = array('url'=>$url, 'controller'=>$controller, 'action'=>$action);
     }
     
-    /* run controller or show error if controller not exists
-     * @ret: void
+    /**
+     * Used to run controller
+     * 
+     * This method is used to run controller depending on route. If controller not 
+     * exists or route not valid then errorpage is shown.
+     * 
+     * @access public
      */
     public static function run() {
         if(isset($_GET[DEFAULT_URL_KEY]) ) {
@@ -189,6 +266,17 @@ class Router {
 </html>';
     }
     
+    /**
+     * Used to redirect webpage
+     * 
+     * This method is used to redirect page to new page. It sets header() or, if 
+     * falied, it sets 'script' tag for javascript window.location redirection.
+     * 
+     * @param string    $arg1 an string representing route.
+     * @param bool    $arg2 if true $url is parsed as relative to WEB_ROOT.
+     * 
+     * @access public
+     */
     public static function redirect($url, $relative=true) {
         if($relative)
             $url = WEB_ROOT . $url;
