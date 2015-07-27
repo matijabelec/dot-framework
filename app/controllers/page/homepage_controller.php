@@ -7,7 +7,13 @@ class Homepage_controller extends Controller {
         
         
         $header = new Header_controller($lang);
-        $header->set_title('Homepage');
+        switch($lang) {
+            case 'hr':
+                $header->set_title('Početna');
+                break;
+            default:
+                $header->set_title('Homepage');
+        }
         $header->add_css('style');
         $header->add_css('style-article');
         $page .= $header->output();
