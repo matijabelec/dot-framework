@@ -18,6 +18,6 @@ spl_autoload_register('the_autoloader');
 remove_mq();
 unregister_globals();
 
-Router::run2();
+Router::run();
 
 ?>

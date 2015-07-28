@@ -14,12 +14,6 @@ interface iListable {
 }
 
 
-interface iWebpage {
-    public function getData();
-    public function loadLangData($langfile, $lang);
-}
-
-
 /* controller */
 interface iSearchable {
     public function setCriteria($criteria);

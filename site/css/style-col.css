@@ -1,0 +1,41 @@
+.col2-left-container,
+.col2-right-container,
+.col3-left-container,
+.col3-middle-container,
+.col3-right-container,
+.main-region{
+    border: 1px solid #000;
+}
+
+
+.main-region{
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    margin: 2em 1em;
+    padding: 2em 1em;
+}
+
+.col2-left-container,
+.col2-right-container,
+.col3-left-container,
+.col3-middle-container,
+.col3-right-container{
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    vertical-align: top;
+}
+
+.col2-left-container,
+.col2-right-container{
+    width: 50%;
+}
+
+.col3-middle-container{
+    width: 40%;
+}
+.col3-left-container,
+.col3-right-container{
+    width: 30%;
+}

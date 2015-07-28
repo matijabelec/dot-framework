@@ -29,22 +29,21 @@ ini_set("display_errors", 1);
 
 
 /*** paths for class-autoloader function ***/
-$include_paths = array( 
+$include_paths = array(
     'controllers' => array('', 
-        '/article', 
-        '/page',
-        '/region'
+        'article',
+        'page'
 ),
     'models' => array('', 
-        '/article', 
-        '/region'
+        'article',
+        'page'
 ),
     'views' => array('', 
-        '/article', 
-        '/region'
+        'article',
+        'page'
 ),
-    'helpers' => array('', 
-        '/region'
+    'helpers' => array('',
+        'article'
 ),
     'modules' => array(''
 )
