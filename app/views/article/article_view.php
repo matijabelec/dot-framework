@@ -13,7 +13,11 @@ class Article_view {
         if(isset($article['id']) 
            && isset($article['title']) 
            && isset($article['text']) ) {
-            return '<h2>' . $article['id'] . ': ' . $article['title'] . '</h2><p>' . $article['text'] . '</p>';
+            return '
+<div class="article-container">
+    <h2 class="title">' . $article['id'] . ': ' . $article['title'] . '</h2>
+    <p class="text">' . $article['text'] . '</p>
+</div>';
         }
         
         return '<p>Article not found.</p>';

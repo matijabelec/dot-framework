@@ -2,7 +2,6 @@
     display: block;
     box-sizing: border-box;
     position: relative;
-    text-align: justify;
     max-width: 600px;
     margin: 2em auto;
     padding: 2em 1em;
@@ -10,8 +9,10 @@
 }
 
 .article-container .title{
+    text-align: left;
     padding-top: 12pt;
 }
 .article-container .text{
+    text-align: center;
     padding-top: 6pt;
 }

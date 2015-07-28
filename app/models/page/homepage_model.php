@@ -8,28 +8,39 @@ class Homepage_model extends Webpage_model {
     public function __construct() {
         $this->addCss('style');
         $this->addCss('style-col');
+        $this->addCss('style-article');
         
-        
-        $article = FrontController::index('article/random'); //CAMV
-        $this->addToContentMiddle($article);
-        $article = FrontController::index('article/random'); //CAMV
-        $this->addToContentMiddle($article);
         $article = FrontController::index('article/random'); //CAMV
         $this->addToContentRight($article);
         
         
+        $tplL = new Template('main/2-col');
+        $tplL->set('content-left', '<p>xx-testL</p>');
+        $tplL->set('content-right', '<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+<p>xx-testR</p>
+');
+        
+        $tplM = new Template('main/3-col');
+        $tplM->set('content-left', '<p>testL</p>');
+        $tplM->set('content-middle', '<p>testM</p>');
+        $tplM->set('content-right', '<p>testR</p>');
+        
         $template = new Template('main/3-col');
-        $template->set('content-left', $this->contentLeft);
-        $template->set('content-middle', $this->contentMiddle);
-        $template->set('content-right', $this->contentRight);
-        $this->addRegion($template);
-        
-        $template = new Template('main/1-col');
-        $template->set('content', $this->contentMiddle);
-        $this->addRegion($template);
-        
-        $template = new Template('main/2-col');
-        $template->set('content-left', $this->contentMiddle);
+        $template->set('content-left', $tplL->output() );
+        $template->set('content-middle', $tplM->output() );
         $template->set('content-right', $this->contentRight);
         $this->addRegion($template);
     }
