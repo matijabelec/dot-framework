@@ -3,9 +3,9 @@
 define('WEB_ROOT', '/dot-framework');
 define('WEB_SITE', WEB_ROOT . '/site');
 
-define('SITE_CSS', WEB_SITE.'/css');
-define('SITE_JS', WEB_SITE.'/js');
-define('SITE_GFX', WEB_SITE.'/gfx');
+define('SITE_CSS', WEB_SITE . '/css');
+define('SITE_JS', WEB_SITE . '/js');
+define('SITE_GFX', WEB_SITE . '/gfx');
 
 
 /*** database ***/

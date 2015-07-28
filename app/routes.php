@@ -2,15 +2,15 @@
 
 Session::start();
 
-Router::set_route('', 'homepage', 'index');
-Router::set_route('index', 'homepage', 'index');
+Router::addRoute('', 'homepage', 'index');
+Router::addRoute('index', 'homepage', 'index');
 
-Router::set_route('story/page', 'storypage', 'page');
-Router::set_route('story/view', 'storypage', 'view');
-Router::set_route('story', 'storypage', 'index');
+Router::addRoute('story/page', 'storypage', 'page');
+Router::addRoute('story/view', 'storypage', 'view');
+Router::addRoute('story', 'storypage', 'index');
 
-Router::set_route('test/', 'testpage', 'index');
+Router::addRoute('test/', 'testpage', 'index');
 
-Router::set_route('lang', 'lang', 'set');
+Router::addRoute('lang', 'lang', 'set');
 
 ?>

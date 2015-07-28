@@ -2,27 +2,27 @@
 
 /* model */
 interface iPageable {
-    public function get_page_records($limit, $offset);
-    public function get_per_page();
-    public function get_current_page();
-    public function get_records_max_count();
+    public function getPageRecords($limit, $offset);
+    public function getPerPage();
+    public function getCurrentPage();
+    public function getRecordsMaxCount();
 }
 
 
 interface iListable {
-    public function get_records();
+    public function getRecords();
 }
 
 
 interface iWebpage {
-    public function get_data();
-    public function load_lang_data($langfile, $lang);
+    public function getData();
+    public function loadLangData($langfile, $lang);
 }
 
 
 /* controller */
 interface iSearchable {
-    public function set_criteria($criteria);
+    public function setCriteria($criteria);
 }
 
 

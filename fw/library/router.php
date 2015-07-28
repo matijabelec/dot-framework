@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Router class used for routing in Dot-framework
  *
@@ -80,7 +81,7 @@ class Router {
      * @return bool the status of route (true if found, false if not).
      * @access private
      */
-    private static function check_route($url) {
+    private static function checkRoute($url) {
         $url = rtrim($url, '/');
         
         $url_el = explode('/', $url);
@@ -193,7 +194,7 @@ class Router {
      * 
      * @access public
      */
-    public static function set_route($url, $controller, $action=null) {
+    public static function addRoute($url, $controller, $action=null) {
         if(is_null($action) ) $action = 'index';
         self::$routes[] = array('url'=>$url, 'controller'=>$controller, 'action'=>$action);
     }
@@ -211,7 +212,7 @@ class Router {
             $url = $_GET[DEFAULT_URL_KEY];
             
             // check route
-            if(self::check_route($url) == true) {
+            if(self::checkRoute($url) == true) {
                 // run controller
                 $ce = explode('/', self::$controller);
                 $c = ucfirst($ce[count($ce)-1].'_controller');
@@ -291,6 +292,30 @@ class Router {
         } else {
             header('Location: ' . $url);
             die();
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public static function run2() {
+        if(isset($_GET[DEFAULT_URL_KEY]) ) {
+            $url = $_GET[DEFAULT_URL_KEY];
+            
+            $frontController = new FrontController;
+            $frontController->index($url);
+        } else {
+            echo '<h1>Ooops... Error!</h1><p>Something went wrong.</p>';
         }
     }
 }

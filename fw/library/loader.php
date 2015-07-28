@@ -18,10 +18,10 @@ class Loader {
      *      else:
      *          null
      */
-    public static function get_template($template_name) {
-        if(!isset($template_name) )
+    public static function getTemplate($templateName) {
+        if(!isset($templateName) )
             return null;
-        $filename = ROOT_TEMPLATES . '/' . $template_name . '.tpl';
+        $filename = ROOT_TEMPLATES . '/' . $templateName . '.tpl';
         if(file_exists($filename) ) {
             return file_get_contents($filename);
         }
@@ -35,10 +35,10 @@ class Loader {
      *      else:
      *          null
      */
-    public static function get_langfile($langfile_name, $lang) {
-        if(!isset($langfile_name) || !isset($lang) )
+    public static function getLangfile($langfileName, $lang) {
+        if(!isset($langfileName) || !isset($lang) )
             return null;
-        $filename = ROOT_LANGS . '/' . $langfile_name . '.lang';
+        $filename = ROOT_LANGS . '/' . $langfileName . '.lang';
         if(file_exists($filename) ) {
             $ret = array();
             $xml = simplexml_load_file($filename);
@@ -72,8 +72,10 @@ class Loader {
      *      else:
      *          false
      */
-     public static function load_module($module_name) {
-        $filename = ROOT_MODULES . '/' . $module_name . '.php';
+     public static function load_module($moduleName) {
+        if(!isset($moduleName) )
+            return false;
+        $filename = ROOT_MODULES . '/' . $moduleName . '.php';
         if(file_exists($filename) ) {
             include_once($filename);
             return true;

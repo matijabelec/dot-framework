@@ -1,6 +1,6 @@
 <?php
 
-class Homepage_view {
+class Testpage_view {
     private $controller;
     private $model;
     
@@ -15,7 +15,7 @@ class Homepage_view {
         
         $header = new Template('standard/header', array('ROOT'=>WEB_ROOT, 'SITE'=>WEB_SITE) );
         $header->set('META-DATA', '<meta name="author" content="Matija Belec"/>');
-        $header->set('CSS-DATA', '<link rel="stylesheet" href="'.SITE_CSS.'/style.css"/>');
+        $header->set('CSS-DATA', '<link rel="stylesheet" href="test.css"/>');
         $header->set('main-page-title', '@Matija\'s place');
         $header->set('header-title', 'MatijaBelec.com');
         

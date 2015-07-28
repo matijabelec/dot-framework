@@ -50,6 +50,7 @@ include_once(ROOT_APP.'/config.php');
 
 include_once(ROOT_FW_LIB.'/loader.php');
 include_once(ROOT_FW_LIB.'/url.php');
+include_once(ROOT_FW_LIB.'/front_controller.php');
 include_once(ROOT_FW_LIB.'/router.php');
 include_once(ROOT_FW_LIB.'/session.php');
 

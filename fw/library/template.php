@@ -61,7 +61,7 @@ class Template {
      * @var int
      * @access private
      */
-    private $curr_n;
+    private $currN;
     
     /**
      * Constructor for template
@@ -80,19 +80,16 @@ class Template {
      * 
      * @access public
      */
-    public function __construct($name, $default_data=null, $inline=false) {
+    public function __construct($name, $defaultData=null, $inline=false) {
         $this->template = '';
         $this->data = array();
         $this->n = 1;
-        
-        $this->set('ROOT', WEB_ROOT);
-        $this->set('SITE', WEB_SITE);
         
         if(isset($name) ) {
             if($inline != false) {
                 $this->template = $name;
             } else {
-                $this->template = Loader::get_template($name);
+                $this->template = Loader::getTemplate($name);
             }
             if(isset($this->template) ) {
                 //$this->process_hardcode_includes();
@@ -103,21 +100,19 @@ class Template {
                     $pattern,
                     function($matches) {
                         $value = $matches[1];
-                        $key = 'template-' . $value;
+                        $key = 'tpl-' . $value;
                         
                         $tpl = new Template($value);
-                        $this->include_template($key, $tpl);
+                        $this->includeTemplate($key, $tpl);
                         return '{@' . $key . '}';
                     },
                     $string
                 );
             }
             
-            if(!is_null($default_data) && is_array($default_data) ) {
-                foreach($default_data as $key=>$val) {
+            if(!is_null($defaultData) && is_array($defaultData) )
+                foreach($defaultData as $key=>$val)
                     $this->set($key, $val);
-                }
-            }
         }
     }
     
@@ -137,9 +132,9 @@ class Template {
      * 
      * @access public
      */
-    public function set($key, $val, $arr_id=1) {
+    public function set($key, $val, $tplN=0) {
         if(isset($key) && isset($val) ) {
-            $a = &$this->data[$arr_id];
+            $a = &$this->data[$tplN];
             $a[$key] = array('type'=>'value', 'value'=>$val);
         }
     }
@@ -156,10 +151,10 @@ class Template {
      * 
      * @access public
      */
-    public function set_data($data, $arr_id=1) {
+    public function setData($data, $tplN=0) {
         if(isset($data) && is_array($data) ) {
             foreach($data as $key=>$val) {
-                $a = &$this->data[$arr_id];
+                $a = &$this->data[$tplN];
                 $a[$key] = array('type'=>'value', 'value'=>$val);
             }
         }
@@ -175,9 +170,8 @@ class Template {
      * @access public
      */
     public function repeat($n) {
-        if(isset($n) && is_numeric($n) && $n>0) {
+        if(isset($n) && is_numeric($n) && $n>0)
             $this->n = $n;
-        }
     }
     
     /**
@@ -196,58 +190,35 @@ class Template {
      * @return string the filled template.
      * @access public
      */
-    public function output($safe=true, $force_rewrite=false) {
+    public function output($safe=true) {
         $string = $this->template;
         $pattern = '/\{\@([a-zA-Z0-9-\/]*)\}/i'; //{@key}
         $filled = '';
         
-        if($safe == true) {
-            for($i=1; $i<=$this->n; $i++) {
-                $this->curr_n = $i;
-                $filled .= preg_replace_callback(
-                    $pattern,
+        for($i=1; $i<=$this->n; $i++) {
+            $this->currN = $i;
+            $filled .= preg_replace_callback(
+                $pattern,
+                ($safe == true ?
                     function($matches) {
-                        $value = $this->filled_data($matches[1], $this->curr_n);
+                        $value = $this->filledData($matches[1], $this->currN);
                         if(is_null($value) ) {
                             return '';
                         }
                         return $value;
-                    },
-                    $string
-                );
-            }
-        } else {
-            for($i=1; $i<=$this->n; $i++) {
-                $this->curr_n = $i;
-                $filled .= preg_replace_callback(
-                    $pattern,
+                    } : 
                     function($matches) {
-                        $value = $this->filled_data($matches[1], $this->curr_n);
+                        $value = $this->filledData($matches[1], $this->currN);
                         if(is_null($value) ) {
                             $v = $matches[0];
                             return $v;
                         }
                         return $value;
-                    },
-                    $string
-                );
-            }
-        }
-        
-        if($force_rewrite!=false) {
-            $filled = preg_replace_callback(
-                $pattern,
-                function($matches) {
-                    $value = $this->filled_data($matches[1]);
-                    if(is_null($value) ) {
-                        return '';
                     }
-                    return $value;
-                },
-                $filled
+                ),
+                $string
             );
         }
-        
         return $filled;
     }
     
@@ -265,9 +236,9 @@ class Template {
      * @return string the filled template.
      * @access public
      */
-    public function include_template($key, Template &$template, $arr_id=1) {
+    public function includeTemplate($key, Template &$template, $tplN=0) {
         if(isset($key) && isset($template) ) {
-            $a = &$this->data[$arr_id];
+            $a = &$this->data[$tplN];
             $a[$key] = array('type'=>'template', 'template'=>&$template);
         }
     }
@@ -281,7 +252,7 @@ class Template {
      * 
      * @access private
      */
-    private function process_hardcode_includes() {
+    private function processHardcodeIncludes() {
         $string = $this->template;
         $pattern = '/\{#include\(([a-zA-Z0-9-\/]*)\)\}/i'; //{#include(region/nav)}
         $this->template = preg_replace_callback(
@@ -310,16 +281,17 @@ class Template {
      *                      returns NULL if key not exists
      * @access private
      */
-    private function filled_data($key, $arr_id=1) {
-        if(isset($key) && isset($this->data[$arr_id]) ) {
-            $a = &$this->data[$arr_id];
-            if(isset($a[$key]) ) {
-                $item = &$a[$key];
-                switch($item['type']) {
-                    case 'value': return $item['value'];
-                    case 'template': return $item['template']->output(false);
-                    default: break;
-                }
+    private function filledData($key, $tplN=0) {
+        if(isset($key) && isset($this->data[$tplN]) && isset($this->data[$tplN][$key]) ) {
+            $item = &$a[$key];
+        } else if(isset($key) && isset($this->data[0]) && isset($this->data[0][$key]) ) {
+            $item = &$this->data[0][$key];
+        }
+        if(isset($item) ) {
+            switch($item['type']) {
+                case 'value': return $item['value'];
+                case 'template': return $item['template']->output(false);
+                default: break;
             }
         }
         return null;
@@ -339,9 +311,9 @@ class Template {
      *                  returns null.
      * @access public
      */
-    public function &get_template($key, $arr_id=1) {
-        if(isset($key) && isset($this->data[$arr_id]) ) {
-            $a = &$this->data[$arr_id];
+    public function &getTemplate($key, $tplN=0) {
+        if(isset($key) && isset($this->data[$tplN]) ) {
+            $a = &$this->data[$tplN];
             if(isset($a[$key]) ) {
                 $item = &$a[$key];
                 switch($item['type']) {
@@ -368,9 +340,9 @@ class Template {
      *                  returns null.
      * @access public
      */
-    public function &get_value($key, $arr_id=1) {
-        if(isset($key) && isset($this->data[$arr_id]) ) {
-            $a = &$this->data[$arr_id];
+    public function &getValue($key, $tplN=0) {
+        if(isset($key) && isset($this->data[$tplN]) ) {
+            $a = &$this->data[$tplN];
             if(isset($a[$key]) ) {
                 $item = &$a[$key];
                 switch($item['type']) {
