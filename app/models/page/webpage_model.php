@@ -1,0 +1,63 @@
+<?php
+
+class Webpage_model {
+    private $dataCss = '';
+    private $dataMeta = '';
+    private $regions = null;
+    
+    protected function addRegion(Template $template, Region_model $model=null) {
+        if(is_null($model) )
+            $model = new Region_model;
+        $this->regions[] = new Region_view($model, $template);
+    }
+    
+    protected function addCss($filename, $inline=false) {
+        if(isset($filename) && is_string($filename) ) {
+            if($inline == false) {
+                $this->dataCss .= 
+                    '<link rel="stylesheet" href="'.SITE_CSS.'/'.$filename.'.css">';
+            } else {
+                $this->dataCss .= '<style>' . $filename . '</style>';
+            }
+        }
+    }
+    
+    protected function addMeta($name, $content) {
+        if(isset($name) && is_string($name) && isset($content) && is_string($content) ) {
+            $this->dataMeta .= '<meta name="' . $name . '" content="' . $content . '">';
+        }
+    }
+    protected function addMetaHttpEquiv($httpequiv, $content) {
+        if(isset($httpequiv) && is_string($httpequiv) 
+           && isset($content) && is_string($content) ) {
+            $this->dataMeta .= '<meta http-equiv="' . $name . '" content="' . $content . '">';
+        }
+    }
+    protected function addMetaCharset($charset='UTF-8') {
+        if(isset($charset) && is_string($charset) ) {
+            $this->dataMeta .= '<meta charset="' . $name . '">';
+        }
+    }
+    
+    public function getDataCss() {
+        return $this->dataCss;
+    }
+    
+    public function getDataMeta() {
+        return $this->dataMeta;
+    }
+    
+    public function getLang() {
+        return Lang_controller::get();
+    }
+    
+    public function getRegions() {
+        return $this->regions;
+    }
+    
+    public function getPageTitle() {
+        return '';
+    }
+}
+
+?>
