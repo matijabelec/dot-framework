@@ -5,7 +5,7 @@ class WebpageModel {
     private $dataMeta = '';
     private $regions = null;
     
-    protected function addRegion(Template $template, RegionModel $model=null) {
+    public function addRegion(Template $template, RegionModel $model=null) {
         if(is_null($model) )
             $model = new RegionModel;
         $this->regions[] = new RegionView($model, $template);
