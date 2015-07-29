@@ -283,7 +283,7 @@ class Template {
      */
     private function filledData($key, $tplN=0) {
         if(isset($key) && isset($this->data[$tplN]) && isset($this->data[$tplN][$key]) ) {
-            $item = &$a[$key];
+            $item = &$this->data[$tplN][$key];
         } else if(isset($key) && isset($this->data[0]) && isset($this->data[0][$key]) ) {
             $item = &$this->data[0][$key];
         }
@@ -356,18 +356,4 @@ class Template {
     }
 }
 
-?><?php
-
-/**
- * Template class used for templates in Dot-framework
- *
- * Template class used for templates in Dot-framework
- *
- * PHP version 5
- *
- * LICENSE: 
- *
- * @author     Matija Belec <matijabelec1@gmail.com>
- * @copyright  2015 Matija Belec
- * @license    Proprietary
- */
+?>
