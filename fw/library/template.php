@@ -290,7 +290,7 @@ class Template {
         if(isset($item) ) {
             switch($item['type']) {
                 case 'value': return $item['value'];
-                case 'template': return $item['template']->output(false);
+                case 'template': return $item['template']->output(true);
                 default: break;
             }
         }

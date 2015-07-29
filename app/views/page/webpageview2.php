@@ -1,6 +1,6 @@
 <?php
 
-class WebpageView {
+class WebpageView2 {
     private $model;
     
     public function __construct(WebpageModel $model) {
