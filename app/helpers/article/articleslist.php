@@ -1,6 +1,6 @@
 <?php
 
-class Articles_list {
+class ArticlesList {
     private $model;
     private $view;
     private $controller;

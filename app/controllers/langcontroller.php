@@ -1,6 +1,6 @@
 <?php
 
-class Lang_controller extends Controller {
+class LangController extends Controller {
     public function set($lang) {
         if(isset($lang) ) {
             switch($lang) {

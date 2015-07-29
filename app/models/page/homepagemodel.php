@@ -1,6 +1,6 @@
 <?php
 
-class Homepage_model extends Webpage_model {
+class HomepageModel extends WebpageModel {
     private $contentLeft = '';
     private $contentRight = '';
     private $contentMiddle = '';
@@ -10,7 +10,7 @@ class Homepage_model extends Webpage_model {
         $this->addCss('style-col');
         $this->addCss('style-article');
         
-        $article = FrontController::index('article/random'); //CAMV
+        $article = FrontController::index('article/random');
         $this->addToContentRight($article);
         
         

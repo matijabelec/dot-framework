@@ -1,9 +1,9 @@
 <?php
 
-class Webpage_view {
+class WebpageView {
     private $model;
     
-    public function __construct(Webpage_model $model) {
+    public function __construct(WebpageModel $model) {
         $this->model = $model;
     }
     

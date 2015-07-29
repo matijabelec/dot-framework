@@ -1,14 +1,14 @@
 <?php
 
-class Webpage_model {
+class WebpageModel {
     private $dataCss = '';
     private $dataMeta = '';
     private $regions = null;
     
-    protected function addRegion(Template $template, Region_model $model=null) {
+    protected function addRegion(Template $template, RegionModel $model=null) {
         if(is_null($model) )
-            $model = new Region_model;
-        $this->regions[] = new Region_view($model, $template);
+            $model = new RegionModel;
+        $this->regions[] = new RegionView($model, $template);
     }
     
     protected function addCss($filename, $inline=false) {
@@ -48,7 +48,7 @@ class Webpage_model {
     }
     
     public function getLang() {
-        return Lang_controller::get();
+        return LangController::get();
     }
     
     public function getRegions() {

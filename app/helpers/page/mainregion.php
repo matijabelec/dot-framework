@@ -1,6 +1,6 @@
 <?php
 
-class Main_region {
+class MainRegion {
     private $template;
     
     public function __construct(Template $template) {

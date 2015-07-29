@@ -1,10 +1,10 @@
 <?php
 
-class Region_view {
+class RegionView {
     private $model;
     private $template;
     
-    public function __construct(Region_model $model, Template $template) {
+    public function __construct(RegionModel $model, Template $template) {
         $this->model = $model;
         $this->template = $template;
     }

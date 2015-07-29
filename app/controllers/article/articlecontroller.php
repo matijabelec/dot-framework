@@ -1,9 +1,9 @@
 <?php
 
-class Article_controller {
+class ArticleController {
     private $model;
     
-    public function __construct(Article_model $model) {
+    public function __construct(ArticleModel $model) {
         $this->model = $model;
     }
     

@@ -102,9 +102,9 @@ class Route {
         && isset($action) 
         && isset($arguments) ) {
             $this->route = $route;
-            $this->model = $model . '_model';
-            $this->view = $view . '_view';
-            $this->controller = $controller . '_controller';
+            $this->model = $model . 'Model';
+            $this->view = $view . 'View';
+            $this->controller = $controller . 'Controller';
             $this->action = $action;
             $this->arguments = $arguments;
         }
@@ -244,7 +244,7 @@ class Router {
             $roEl = explode('/', $r['url']);
             $roN = count($roEl);
             
-            if($roN==1 && $rN==1) {
+            if($roN==1 && $rN>=1) {
                 if($roEl[0] == $rEl[0]) {
                     return new Route($r['url'], 
                                      $r['model'], 
@@ -259,11 +259,11 @@ class Router {
                                      $r['model'], 
                                      $r['view'], 
                                      $r['controller'], 
-                                     $rN==1 ? $r['action'] : $rEl[1], 
+                                     ($rN==1 ? $r['action'] : $rEl[1]), 
                                      $args);
                 }
             } else if($roN==2 && $roEl[1]!='' && $rN>=2) {
-                if($roEl[0]==$rEl[0] && roEl[1]==$r[1]) {
+                if($roEl[0]==$rEl[0] && $roEl[1]==$rEl[1]) {
                     return new Route($r['url'], 
                                      $r['model'], 
                                      $r['view'], 

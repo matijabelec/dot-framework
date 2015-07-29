@@ -136,6 +136,8 @@ class FrontController {
         unset($c);
         unset($m);
         
+        if($data == '')
+            $status = STATUS_ERR;
         return $data;
     }
 }

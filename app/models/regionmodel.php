@@ -1,6 +1,6 @@
 <?php
 
-class Region_model {
+class RegionModel {
     public function getData() {
         return array();
     }

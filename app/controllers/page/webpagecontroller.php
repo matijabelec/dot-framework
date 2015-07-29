@@ -1,6 +1,6 @@
 <?php
 
-class Webpage_controller {
+class WebpageController {
     public function index() {}
 }
 
