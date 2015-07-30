@@ -1,9 +1,15 @@
 <?php
 
-class HomepageView extends StandardpageView {
+class HomepageView extends WebpageView {
     public function __construct(HomepageModel $model) {
-        $template = new Template('<div><h2>Homepage</h2></div>', null, true);
+        $template = new Template('page/homepage');
         parent::__construct($model, $template);
+    }
+    
+    public function output() {
+        $data = $this->model->getArticles();
+        $this->template->set('articles', $data);
+        return parent::output();
     }
 }
 

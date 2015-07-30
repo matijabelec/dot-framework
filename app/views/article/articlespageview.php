@@ -1,18 +1,15 @@
 <?php
 
-class ArticlesPageView extends WebpageView {
-    public function __construct($model) {
-        $view = new ArticlesView($model);
-        
-        $template = new Template('{@articles}', 
-                                array('articles'=>$view->output() ), 
-                                true);
-        
-        
-        $pageModel = new WebpageModel;
-        $pageModel->addRegion($template);
-        
-        parent::__construct($pageModel);
+class ArticlespageView extends WebpageView {
+    public function __construct(ArticlespageModel $model) {
+        $template = new Template('page/articlespage');
+        parent::__construct($model, $template);
+    }
+    
+    public function output() {
+        $data = $this->model->getArticles();
+        $this->template->set('articles', $data);
+        return parent::output();
     }
 }
 

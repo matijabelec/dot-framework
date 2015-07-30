@@ -1,16 +1,15 @@
 <?php
 
 class HomepageModel extends WebpageModel {
-    private $langData;
+    private $articles;
     
     public function __construct() {
-        $this->langData = Loader::getLangfile('region/header', 'en');
-        $this->langData += Loader::getLangfile('region/nav', 'en');
-        $this->langData += Loader::getLangfile('region/footer', 'en');
+        $articleModel = new ArticleModel;
+        $this->articles = new ArticlesView($articleModel);
     }
     
-    public function getData() {
-        return $this->langData;
+    public function getArticles() {
+        return $this->articles->output();
     }
 }
 

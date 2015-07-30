@@ -1,8 +1,9 @@
 <?php
 
 class ArticlesView extends PageableView {
-    public function __construct(iPageable $model) {
-        $template = new Template('<div>{@records}</div><p>{@pages}</p>', null, true);
+    public function __construct(iPageable $model, Template $template=null) {
+        if(is_null($template) )
+            $template = new Template('<div>{@records}</div><p>{@pages}</p>', null, true);
         parent::__construct($model, $template);
         
         

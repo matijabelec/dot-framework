@@ -5,7 +5,11 @@ class WebpageModel {
     private $dataMeta = '';
     private $regions = null;
     
-    public function addRegion(Template $template, RegionModel $model=null) {
+    public function getData() {
+        return array();
+    }
+    
+    /*public function addRegion(Template $template, RegionModel $model=null) {
         if(is_null($model) )
             $model = new RegionModel;
         $this->regions[] = new RegionView($model, $template);
@@ -37,27 +41,7 @@ class WebpageModel {
         if(isset($charset) && is_string($charset) ) {
             $this->dataMeta .= '<meta charset="' . $name . '">';
         }
-    }
-    
-    public function getDataCss() {
-        return $this->dataCss;
-    }
-    
-    public function getDataMeta() {
-        return $this->dataMeta;
-    }
-    
-    public function getLang() {
-        return LangController::get();
-    }
-    
-    public function getRegions() {
-        return $this->regions;
-    }
-    
-    public function getPageTitle() {
-        return '';
-    }
+    }*/
 }
 
 ?>
