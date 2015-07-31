@@ -4,20 +4,17 @@ class NavigationView extends ComplexView {
     private $model;
     
     public function __construct(ComplexModel &$model, Template &$template=null) {
-        $template = new Template('<nav><ul>{@menu}</ul></nav>', null, true);
+        $template = new Template('<nav><ul>{@main-menu}</ul></nav>', null, true);
         $this->model = $model;
         parent::__construct($this->model, $template);
         
-        $itemTpl = new Template('<li></li>', null, true);
+        $itemTpl = new Template('<li><a href="{@link}">{@name}</a></li>', null, true);
         
-        $item1 = $this->model->getModel('item1');
-        if(!is_null($model) ) {
-            $view = new View($item1, $itemTpl);
-            $this->assignView('menu', $view);
+        $item1 = $this->model->getModel('menu');
+        if(!is_null($item1) ) {
+            $view = new MenuView($item1, $itemTpl);
+            $this->assignView('main-menu', $view);
         }
-        /*
-        $view = new ListableView();
-        $this->assignView('home', $view);*/
     }
 }
 

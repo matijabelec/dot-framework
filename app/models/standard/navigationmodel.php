@@ -4,14 +4,10 @@ class NavigationModel extends ComplexModel {
     public function __construct() {
         parent::__construct();
         
-        $nav1 = new Model;
-        $this->assignModel('item1', $nav1);
-        
-        $nav2 = new Model;
-        $this->assignModel('item2', $nav2);
-        
-        $nav3 = new Model;
-        $this->assignModel('item3', $nav3);
+        $menu = new MenuModel([ ['Home', WEB_ROOT.'/'],
+                                ['Projects', WEB_ROOT.'/projects'],
+                                ['About', WEB_ROOT.'/about'] ]);
+        $this->assignModel('menu', $menu);
     }
 }
 
