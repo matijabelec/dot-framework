@@ -38,6 +38,7 @@ class Session {
      * @param string    $arg1 an string representing name for session.
      * 
      * @access public
+     * @static
      */
     public static function start($name='SESS_DFW_UNK') {
         session_name($name);
@@ -50,6 +51,7 @@ class Session {
      * This method destroys the session.
      * 
      * @access public
+     * @static
      */
     public static function destroy() {
         session_destroy();
@@ -64,6 +66,7 @@ class Session {
      * @param mixed    $arg2 represents variable's value.
      * 
      * @access public
+     * @static
      */
     public static function set($key, $val) {
         if(isset($key) && isset($val) )
@@ -79,6 +82,7 @@ class Session {
      * 
      * @return mixed the data of variable.
      * @access public
+     * @static
      */
     public static function get($key) {
         if(isset($key) && isset($_SESSION[$key]) )
