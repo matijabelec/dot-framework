@@ -26,9 +26,9 @@
     </nav>
     <main id="main">
         <div class="main-region">
-            <div class="col2-left-container">
+            <div class="col2-left-container width-pc-70 width-hd-60">
                 {@articles}
-            </div><div class="col2-right-container">
+            </div><div class="col2-right-container width-pc-30 width-hd-40">
                 <div class="ads-container-right">
                     <div>
                         <h3>Ad title</h3>
