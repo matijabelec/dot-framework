@@ -19,6 +19,10 @@
  *
  * Model class is used for all models used in framework.
  */
-class Model {}
+class Model {
+    public function getTemplateData() {
+        return [];
+    }
+}
 
 ?>

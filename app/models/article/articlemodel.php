@@ -1,6 +1,6 @@
 <?php
 
-class ArticleModel implements iPageable {
+class ArticleModel extends Model implements iPageable, iListable {
     private $id;
     public function setId($id) {
         if(isset($id) && is_numeric($id) )
@@ -20,12 +20,17 @@ class ArticleModel implements iPageable {
     }
     
     
+    public function getRecords() {
+        $articles = Database::query('SELECT id, title, text FROM articles_view');
+        return $articles;
+    }
     
     
-    private $page = 1;
+    
+    private $page = 0;
     private $perPage = 5;
     public function setPage($page) {
-        if(isset($page) && is_numeric($page) && $page>0)
+        if(isset($page) && is_numeric($page) && $page>=0)
             $this->page = $page;
     }
     public function getPageRecords($limit, $offset) {

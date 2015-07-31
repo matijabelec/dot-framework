@@ -51,14 +51,14 @@ define('ROOT_MODULES', ROOT_APP.'/modules');
 
 /**
  * Global variable used when it is needed to return null by reference
- * @global null $GLOBALS['null_guard']
+ * @global null $GLOBALS['nullGuard']
  */
-$null_guard = null;
+$nullGuard = null;
 
 /**
  * Global variable used for autoload function to determine paths
- * @global array $GLOBALS['include_paths']
+ * @global array $GLOBALS['includePaths']
  */
-$include_paths = array();
+$includePaths = [];
 
 ?>

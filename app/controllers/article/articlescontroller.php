@@ -3,7 +3,7 @@
 class ArticlesController {
     private $model;
     
-    public function __construct(ArticleModel $model) {
+    public function __construct(ArticleModel &$model) {
         $this->model = $model;
     }
     

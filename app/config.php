@@ -37,29 +37,29 @@ ini_set("display_errors", 1);
 /*
  * paths for class-autoloader function
  */
-$include_paths = array(
-    'controllers' => array('', 
+$includePaths = [
+    'controllers' => ['', 
         'article',
         'page',
         'standard'
-),
-    'models' => array('', 
+    ],
+    'models' => ['', 
         'article',
         'page',
         'standard'
-),
-    'views' => array('', 
+    ],
+    'views' => ['', 
         'article',
         'page',
         'standard'
-),
-    'helpers' => array('',
+    ],
+    'helpers' => ['',
         'article',
         'standard'
-),
-    'modules' => array(''
-)
-);
+    ],
+    'modules' => [''
+    ]
+];
 
 
 ?>

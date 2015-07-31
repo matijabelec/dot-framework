@@ -19,6 +19,8 @@
  *
  * Controller class is used for all controllers used in framework.
  */
-class Controller {}
+class Controller {
+    
+}
 
 ?>

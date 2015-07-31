@@ -50,7 +50,7 @@ include_once(ROOT_APP.'/config.php');
 
 include_once(ROOT_FW_LIB.'/loader.php');
 include_once(ROOT_FW_LIB.'/url.php');
-include_once(ROOT_FW_LIB.'/front_controller.php');
+include_once(ROOT_FW_LIB.'/frontcontroller.php');
 include_once(ROOT_FW_LIB.'/router.php');
 include_once(ROOT_FW_LIB.'/session.php');
 
@@ -71,31 +71,31 @@ include_once(ROOT_FW_LIB.'/controller.php');
  * 
  * @param string $arg1 a class name
  */
-function the_autoloader($class) {
-    global $include_paths; 
+function theAutoloader($class) {
+    global $includePaths; 
     $class = '/' . strtolower($class) . '.php';
     
-    foreach($include_paths['controllers'] as $path) {
+    foreach($includePaths['controllers'] as $path) {
         $filename = ROOT_CONTROLLERS . '/' . $path . $class;
         if(file_exists($filename) ) { include_once($filename); return; }
     }
     
-    foreach($include_paths['models'] as $path) {
+    foreach($includePaths['models'] as $path) {
         $filename = ROOT_MODELS . '/' . $path . $class;
         if(file_exists($filename) ) { include_once($filename); return; }
     }
     
-    foreach($include_paths['views'] as $path) {
+    foreach($includePaths['views'] as $path) {
         $filename = ROOT_VIEWS . '/' . $path . $class;
         if(file_exists($filename) ) { include_once($filename); return; }
     }
     
-    foreach($include_paths['helpers'] as $path) {
+    foreach($includePaths['helpers'] as $path) {
         $filename = ROOT_HELPERS . '/' . $path . $class;
         if(file_exists($filename) ) { include_once($filename); return; }
     }
     
-    foreach($include_paths['modules'] as $path) {
+    foreach($includePaths['modules'] as $path) {
         $filename = ROOT_MODULES . '/' . $path . $class;
         if(file_exists($filename) ) { include_once($filename); return; }
     }
@@ -106,7 +106,7 @@ function the_autoloader($class) {
  * 
  * This function traverse all globals and unset their values
  */
-function unregister_globals() {
+function unregisterGlobals() {
     if(ini_get('register_globals') ) {
         $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
         foreach ($array as $value)
@@ -126,8 +126,8 @@ function unregister_globals() {
  * 
  * @return mixed returned cleaned value
  */
-function strip_slashes_deep($value) {
-    $value = is_array($value) ? array_map('strip_slashes_deep', $value) : stripslashes($value);
+function stripSlashesDeep($value) {
+    $value = is_array($value) ? array_map('stripSlashesDeep', $value) : stripslashes($value);
     return $value;
 }
 
@@ -137,11 +137,11 @@ function strip_slashes_deep($value) {
  * Function removes 'magic quotes' in all $_GET,
  * $_POST or $_COOKIE data.
  */
-function remove_mq() {
+function removeMQ() {
     if(get_magic_quotes_gpc() ) {
-        $_GET = strip_slashes_deep($_GET);
-        $_POST = strip_slashes_deep($_POST);
-        $_COOKIE = strip_slashes_deep($_COOKIE);
+        $_GET = stripSlashesDeep($_GET);
+        $_POST = stripSlashesDeep($_POST);
+        $_COOKIE = stripSlashesDeep($_COOKIE);
     }
 }
 
@@ -156,9 +156,9 @@ include_once(ROOT_APP.'/routes.php');
 /*
  * init
  */
-spl_autoload_register('the_autoloader');
-remove_mq();
-unregister_globals();
+spl_autoload_register('theAutoloader');
+removeMQ();
+unregisterGlobals();
 
 Router::run();
 
