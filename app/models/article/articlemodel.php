@@ -2,6 +2,11 @@
 
 class ArticleModel extends Model implements iPageable, iListable {
     private $id;
+    
+    public function __construct() {
+        parent::__construct();
+    }
+    
     public function setId($id) {
         if(isset($id) && is_numeric($id) )
             $this->id = $id;

@@ -5,6 +5,7 @@ class PageableView extends View {
     private $template;
     
     public function __construct(iPageable &$model, Template &$template) {
+        parent::__construct($model, $template);
         $this->model = $model;
         $this->template = $template;
     }

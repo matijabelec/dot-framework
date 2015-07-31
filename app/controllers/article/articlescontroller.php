@@ -1,9 +1,10 @@
 <?php
 
-class ArticlesController {
+class ArticlesController extends Controller {
     private $model;
     
     public function __construct(ArticleModel &$model) {
+        parent::__construct();
         $this->model = $model;
     }
     

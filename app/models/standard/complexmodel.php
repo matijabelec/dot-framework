@@ -4,12 +4,13 @@ class ComplexModel extends Model {
     private $modelsList;
     
     public function __construct() {
+        parent::__construct();
         $this->modelsList = [];
     }
     
     protected function assignModel($name, Model &$model) {
         if(isset($name) && isset($model) ) {
-            $this->modelsList[$name] = $view;
+            $this->modelsList[$name] = $model;
             return true;
         }
         return false;

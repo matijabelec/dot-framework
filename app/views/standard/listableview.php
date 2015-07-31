@@ -5,6 +5,7 @@ class ListableView extends View {
     private $template;
     
     public function __construct(iListable &$model, Template &$template) {
+        parent::__construct($model, $template);
         $this->model = $model;
         $this->template = $template;
     }

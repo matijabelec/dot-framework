@@ -18,6 +18,8 @@ Session::start();
 Router::addRoute('', 'article', 'articleslist', 'Webpage', 'index');
 Router::addRoute('articles/page', 'article', 'articlespage', 'articles', 'page');
 
+Router::addRoute('nav', 'navigation', 'navigation', 'test', 'index');
+
 /*
  * other includes
  */

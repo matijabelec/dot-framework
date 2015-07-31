@@ -4,12 +4,12 @@ class WebpageView extends View {
     private $model;
     private $template;
     
-    private $viewsArray;
+    private $viewsArray = [];
     
-    public function __construct(WebpageModel $model, Template $template=null) {
+    public function __construct(WebpageModel &$model, Template &$template) {
+        parent::__construct($model, $template);
         $this->model = $model;
         $this->template = $template;
-        $this->viewsArray = array();
     }
     
     public function assignView($name, View $view) {

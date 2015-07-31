@@ -20,8 +20,19 @@
  * View class is used for all views used in framework.
  */
 class View {
+    private $model;
+    private $template;
+    
+    public function __construct(Model &$model, Template &$template) {
+        $this->model = $model;
+        $this->template = $template;
+    }
+    
     public function output() {
-        return '';
+        $data = $this->model->getTemplateData();
+        if(is_array($data) )
+            $this->template->setData($data);
+        return $this->template->output();
     }
 }
 

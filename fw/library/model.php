@@ -20,6 +20,8 @@
  * Model class is used for all models used in framework.
  */
 class Model {
+    public function __construct() {}
+    
     public function getTemplateData() {
         return [];
     }

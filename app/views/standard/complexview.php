@@ -6,7 +6,8 @@ class ComplexView extends View {
     
     private $viewsList = [];
     
-    public function __construct(Model &$model, Template &$template=null) {
+    public function __construct(Model &$model, Template &$template) {
+        parent::__construct($model, $template);
         $this->model = $model;
         $this->template = $template;
     }
@@ -21,15 +22,16 @@ class ComplexView extends View {
     
     public function output() {
         // get all views rendered and set for a key in data
+        $data = [];
         foreach($this->viewsList as $viewName=>&$view) {
             $data[$viewName] = $view->output();
         }
         
         // add data to template
-        //$this->template->setData($data);
+        $this->template->setData($data);
         
         // render
-        return 'x';//$this->template->output(true);
+        return $this->template->output(true);
     }
 }
 
