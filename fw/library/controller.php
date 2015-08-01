@@ -1,26 +1,17 @@
 <?php
 
-/**
- * Controller class used for controllers in Dot-framework
- *
- * Controller class used for controllers in framework.
- *
- * PHP version 5
- *
- * LICENSE: 
- *
- * @author     Matija Belec <matijabelec1@gmail.com>
- * @copyright  2015 Matija Belec
- * @license    Proprietary
- */
-
-/**
- * An default Controller class of Dot-framework
- *
- * Controller class is used for all controllers used in framework.
- */
-class Controller {
-    public function __construct() {}
+class BaseController {
+    protected $registry;
+    protected $load;
+    
+    public function __construct() {
+        $this->registry = Registry::getInstance();
+        $this->load = new Load;
+    }
+    
+    public function indexAction() {
+        
+    }
 }
 
 ?>
