@@ -42,7 +42,13 @@ class Template {
             return preg_replace_callback(
                 '/\{\@([a-zA-Z0-9-\/]*)\}/i', //{@key}
                 function($m) {
-                    $value = isset($this->storage[$m[1] ]) ? $this->storage[$m[1] ] : '';
+                    if(isset($this->storage[$m[1] ]) ) {
+                        $value = is_a($this->storage[$m[1] ], 'BaseView') ? 
+                                        $this->storage[$m[1] ]->output() : 
+                                        $this->storage[$m[1] ];
+                    } else {
+                        $value = '';
+                    }
                     return $value;
                 },
                 $this->template
@@ -51,7 +57,13 @@ class Template {
             return preg_replace_callback(
                 '/\{\@([a-zA-Z0-9-\/]*)\}/i', //{@key}
                 function($m) {
-                    $value = isset($this->storage[$m[1] ]) ? $this->storage[$m[1] ] : $m[0];
+                    if(isset($this->storage[$m[1] ]) ) {
+                        $value = is_a($this->storage[$m[1] ], 'BaseView') ? 
+                                        $this->storage[$m[1] ]->output() : 
+                                        $this->storage[$m[1] ];
+                    } else {
+                        $value = $m[0];
+                    }
                     return $value;
                 },
                 $this->template

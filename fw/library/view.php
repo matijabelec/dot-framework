@@ -33,6 +33,12 @@ class BaseView {
         throw new Exception('View has no data with key "' . $key . '".');
     }
     
+    final protected function checkInstance($key, $class) {
+        if(!isset($key) || !is_a($key, $class) ) {
+            throw new Exception('View->CheckInstance failed.');
+        }
+    }
+    
     public function output() {
         return '';
     }

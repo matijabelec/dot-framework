@@ -1,1 +1,5 @@
-<h3>{@tes-2}</h3>
+<h3>Drugi</h3>
+
+<div>
+    {@viewer1}
+</div>

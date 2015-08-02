@@ -46,57 +46,7 @@ if(ENVIRONMENT == 'DEV') {
 try {
     Router::route(new Request);
 } catch(Exception $e) {
-    echo "<!doctype html>
-<html>
-<head>
-    <meta charset=\"UTF-8\">
-    <title>Generic errorpage</title>
-</head>
-<body>
-<style>
-*{
-    margin: 0;
-    padding: 0;
-}
-body{
-    text-align:center;
-    border: 1px solid #000;
-    margin: 2em 1em;
-}
-h1, h2, p{
-    display: block;
-    box-sizing: border-box;
-    position: relative;
-}
-h1{
-    font-size: 22pt;
-    margin: 1em .4em .4em;
-    padding: .4em .2em;
-    border-bottom: 1px solid #000;
-}
-h2{
-    font-size: 20pt;
-    margin: .6em .4em .2em;
-    padding: .4em .2em;
-}
-p{
-    text-align: left;
-    font-size: 16pt;
-    margin: .4em .4em 1em;
-    padding: .4em .2em;
-}
-.colored{
-    color: #cc4444;
-}
-</style>
-    <div>
-        <h1>Dot framework</h1>
-        <h2>Generic errorpage</h2>
-        <p class=\"colored\">Error:</p>
-        <p>{$e->getMessage()}</p>
-    </div>
-</body>
-</html>";
+    echo "<!doctype html><html><head><meta charset=\"UTF-8\"><title>Generic errorpage</title></head><body><style>*{margin:0;padding:0;}body{text-align:center;border:1px solid #000;margin:2em 1em;}h1,h2,p{display:block;box-sizing:border-box;position:relative;}h1{font-size:22pt;margin:1em .4em .4em;padding:.4em .2em;border-bottom:1px solid #000;}h2{font-size:20pt;margin:.6em .4em .2em;padding:.4em .2em;}p{text-align:left;font-size:16pt;margin:.4em .4em 1em;padding:.4em .2em;}.colored{color: #cc4444;}</style><div><h1>Dot framework</h1><h2>Generic errorpage</h2><p class=\"colored\">Error:</p><p>{$e->getMessage()}</p></div></body></html>";
 }
 
 ?>

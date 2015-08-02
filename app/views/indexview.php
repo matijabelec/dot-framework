@@ -2,11 +2,7 @@
 
 class IndexView extends BaseView {
     public function output() {
-        $this->template->name = 'test';
-        $this->template->tekst = 'test-text';
-        $this->template->set('tes-2', 'bxbcrrhtrjt');
-        
-        $this->model->getPage();
+        $this->checkInstance($this->template, 'Template');
         
         return $this->template->output();
     }

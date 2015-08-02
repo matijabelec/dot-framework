@@ -32,6 +32,11 @@ class BaseController {
         }
         throw new Exception('Controller has no data with key "' . $key . '".');
     }
+    
+    protected function redirect($url, $httpCode=302) {
+        header('Location: ' . $url, true, $httpCode);
+        die('<p><a href="' . $url . '">Click here</a>if not redirrected.</p>');
+    }
 }
 
 ?>
