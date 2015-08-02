@@ -42,7 +42,6 @@ require_once(ROOT . 'fw/library/mvc/template.php');
 require_once(ROOT . 'fw/library/mvc/model.php');
 require_once(ROOT . 'fw/library/mvc/view.php');
 require_once(ROOT . 'fw/library/mvc/controller.php');
-require_once(ROOT . 'fw/library/mvc/multilangcontroller.php');
 
 require_once(ROOT . 'fw/library/router.php');
 
@@ -54,6 +53,18 @@ require_once(ROOT_APP . 'includes.php');
  * for framework to operate normal with authorizations.
  */
 Session::start(DEFAULT_SESSION_NAME);
+
+
+/*
+ * Get/set default language for multilanguage mode.
+ */
+if(MULTILANG == true) {
+    if(is_null(Cookie::getInstance()->get(DEFAULT_LANG_COOKIE_NAME) ) ) {
+        Cookie::getInstance()->set(DEFAULT_LANG_COOKIE_NAME, DEFAULT_LANGUAGE, 86400*30, '/');
+    }
+    Registry::getInstance()->language = Cookie::getInstance()->get(DEFAULT_LANG_COOKIE_NAME);
+}
+
 
 /*
  * Start router and check request.

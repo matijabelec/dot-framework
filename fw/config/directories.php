@@ -8,6 +8,7 @@ define('APP_MODELS', ROOT_APP . 'models/');
 define('APP_VIEWS', ROOT_APP . 'views/');
 define('APP_CONTROLLERS', ROOT_APP . 'controllers/');
 define('APP_TEMPLATES', ROOT_APP . 'templates/');
+define('APP_MULTILANGS', ROOT_APP . 'multilangs/');
 
 /*
  * declare website root (public_html)

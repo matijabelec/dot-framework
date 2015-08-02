@@ -54,7 +54,17 @@ class Load {
         } else {
             return new Template($template);
         }
+        
         throw new Exception('Template "' . $template . '" does not exists or cannot be loaded.');
+    }
+    
+    public function multilangFile($mlf) {
+        $file = APP_MULTILANGS . $mlf . '.mlf';
+        if(is_readable($file) ) {
+            return new MultilangFile($mlf);
+        }
+        
+        throw new Exception('Multilang file "' . $mlf . '" does not exists or cannot be loaded.');
     }
 }
 

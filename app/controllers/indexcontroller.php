@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends MultilangBaseController {
+class IndexController extends BaseController {
     public function indexAction() {
         $model = $this->load->model('index');
         $model->setPage(1);
