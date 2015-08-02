@@ -10,29 +10,6 @@ require_once(ROOT . 'fw/config/db.php');
 require_once(ROOT . 'fw/config/directories.php');
 
 /*
- * Load library files.
- */
-require_once(ROOT . 'fw/library/registry.php');
-require_once(ROOT . 'fw/library/load.php');
-
-require_once(ROOT . 'fw/library/request/request.php');
-require_once(ROOT . 'fw/library/request/cookie.php');
-require_once(ROOT . 'fw/library/request/session.php');
-
-require_once(ROOT . 'fw/library/database/databasepdoconnection.php');
-require_once(ROOT . 'fw/library/database/database.php');
-
-require_once(ROOT . 'fw/library/mvc/template.php');
-require_once(ROOT . 'fw/library/mvc/model.php');
-require_once(ROOT . 'fw/library/mvc/view.php');
-require_once(ROOT . 'fw/library/mvc/controller.php');
-require_once(ROOT . 'fw/library/mvc/multilangcontroller.php');
-
-require_once(ROOT . 'fw/library/router.php');
-
-require_once(ROOT_APP . 'includes.php');
-
-/*
  * prepare error_reporting
  */
 if(ENVIRONMENT == 'DEV') {
@@ -44,6 +21,33 @@ if(ENVIRONMENT == 'DEV') {
 } else {
     die('ENVIRONMENT has wrong value!');
 }
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Load library files.
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+require_once(ROOT . 'fw/library/registry.php');
+require_once(ROOT . 'fw/library/load.php');
+
+require_once(ROOT . 'fw/library/request/request.php');
+require_once(ROOT . 'fw/library/request/cookie.php');
+require_once(ROOT . 'fw/library/request/session.php');
+
+require_once(ROOT . 'fw/library/database/databasepdoconnection.php');
+require_once(ROOT . 'fw/library/database/database.php');
+
+require_once(ROOT . 'fw/library/multilanguage/multilangfile.php');
+
+require_once(ROOT . 'fw/library/mvc/template.php');
+require_once(ROOT . 'fw/library/mvc/model.php');
+require_once(ROOT . 'fw/library/mvc/view.php');
+require_once(ROOT . 'fw/library/mvc/controller.php');
+require_once(ROOT . 'fw/library/mvc/multilangcontroller.php');
+
+require_once(ROOT . 'fw/library/router.php');
+
+require_once(ROOT_APP . 'includes.php');
+
 
 /*
  * Start working with sessions. Session is required
