@@ -21,6 +21,17 @@ class BaseModel {
         }
         throw new Exception('Model has no data with key "' . $key . '".');
     }
+    
+    public function set($key, $val) {
+        $this->storage[$key] = $val;
+    }
+    
+    public function get($key) {
+        if(isset($this->storage[$key]) ) {
+            return $this->storage[$key];
+        }
+        throw new Exception('Model has no data with key "' . $key . '".');
+    }
 }
 
 ?>

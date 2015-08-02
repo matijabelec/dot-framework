@@ -21,6 +21,17 @@ class BaseController {
         }
         throw new Exception('Controller has no data with key "' . $key . '".');
     }
+    
+    public function set($key, $val) {
+        $this->storage[$key] = $val;
+    }
+    
+    public function get($key) {
+        if(isset($this->storage[$key]) ) {
+            return $this->storage[$key];
+        }
+        throw new Exception('Controller has no data with key "' . $key . '".');
+    }
 }
 
 ?>
