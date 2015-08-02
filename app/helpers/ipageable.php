@@ -5,7 +5,7 @@ interface iPageable {
      * Returns records for current page.
      * 
      * @return array
-     * @public
+     * @access public
      */
     public function getRecords();
     
@@ -14,7 +14,7 @@ interface iPageable {
      * shown on pages.
      * 
      * @return integer
-     * @public
+     * @access public
      */
     public function getRecordsMax();
     
@@ -22,7 +22,7 @@ interface iPageable {
      * Returns current's page number.
      * 
      * @return integer
-     * @public
+     * @access public
      */
     public function getCurrentPage();
     
@@ -30,7 +30,7 @@ interface iPageable {
      * Returns number of records shown per page.
      * 
      * @return integer
-     * @public
+     * @access public
      */
     public function getRecordsPerPage();
 }

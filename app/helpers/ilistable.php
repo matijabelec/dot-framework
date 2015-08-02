@@ -5,7 +5,7 @@ interface iListable {
      * Returns all records from list.
      * 
      * @return array
-     * @public
+     * @access public
      */
     public function getData();
 }

@@ -10,8 +10,10 @@ define('APP_CONTROLLERS', ROOT_APP . 'controllers/');
 define('APP_TEMPLATES', ROOT_APP . 'templates/');
 define('APP_MULTILANGS', ROOT_APP . 'multilangs/');
 
-/*
- * declare website root (public_html)
+/**
+ * Website root path (public_html)
+ * 
+ * @var string represents a path to "site root"
  */
 define('WEB_ROOT', '/dot-framework/');
 
