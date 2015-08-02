@@ -13,16 +13,21 @@ require_once(ROOT . 'fw/config/directories.php');
  * Load library files.
  */
 require_once(ROOT . 'fw/library/registry.php');
-require_once(ROOT . 'fw/library/request.php');
-require_once(ROOT . 'fw/library/router.php');
 require_once(ROOT . 'fw/library/load.php');
 
-require_once(ROOT . 'fw/library/databasepdoconnection.php');
-require_once(ROOT . 'fw/library/database.php');
-require_once(ROOT . 'fw/library/template.php');
-require_once(ROOT . 'fw/library/model.php');
-require_once(ROOT . 'fw/library/controller.php');
-require_once(ROOT . 'fw/library/view.php');
+require_once(ROOT . 'fw/library/request/request.php');
+require_once(ROOT . 'fw/library/request/cookie.php');
+require_once(ROOT . 'fw/library/request/session.php');
+
+require_once(ROOT . 'fw/library/database/databasepdoconnection.php');
+require_once(ROOT . 'fw/library/database/database.php');
+
+require_once(ROOT . 'fw/library/mvc/template.php');
+require_once(ROOT . 'fw/library/mvc/model.php');
+require_once(ROOT . 'fw/library/mvc/controller.php');
+require_once(ROOT . 'fw/library/mvc/view.php');
+
+require_once(ROOT . 'fw/library/router.php');
 
 require_once(ROOT_APP . 'includes.php');
 
@@ -38,6 +43,12 @@ if(ENVIRONMENT == 'DEV') {
 } else {
     die('ENVIRONMENT has wrong value!');
 }
+
+/*
+ * Start working with sessions. Session is required
+ * for framework to operate normal with authorizations.
+ */
+Session::start(DEFAULT_SESSION_NAME);
 
 /*
  * Start router and check request.

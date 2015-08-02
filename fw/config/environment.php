@@ -17,4 +17,10 @@ define('ENVIRONMENT', 'DEV');
  */
 define('REQUEST_FIRST_PARAM', 1);
 
+/**
+ * Default session's name.
+ * @var string representing session name
+ */
+define('DEFAULT_SESSION_NAME', 'SESS_DFW_UNK');
+
 ?>
