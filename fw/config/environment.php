@@ -23,4 +23,21 @@ define('REQUEST_FIRST_PARAM', 1);
  */
 define('DEFAULT_SESSION_NAME', 'SESS_DFW_UNK');
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Language data
+ * 
+ * Primarily language cookie config's.
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * Used in MultilangBaseController as default language
+ * to set in cookie if no language cookie found.
+ */
+define('DEFAULT_LANGUAGE', 'en');
+
+/**
+ * Used as language cookie name.
+ */
+define('DEFAULT_LANG_COOKIE_NAME', 'lang');
+
 ?>
