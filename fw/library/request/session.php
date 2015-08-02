@@ -11,7 +11,11 @@ class Session {
         session_start();
     }
     
-    private function __construct() {}
+    private function __construct() {
+        foreach($_SESSION as $name=>&$val) {
+            $this->set($name, $val);
+        }
+    }
     
     public static function getInstance() {
         if(!self::$instance instanceof self) {
@@ -30,11 +34,15 @@ class Session {
         unset($this->storage[$key]);
     }
     
+    public function __isset($key) {
+        return isset($this->storage[$key]);
+    }
+    
     public function __get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Session has no data with key "' . $key . '".');
+        return null;
     }
     
     public function set($key, $val) {
@@ -42,11 +50,11 @@ class Session {
          $this->storage[$key] = $val;
     }
     
-    public static function get($key) {
+    public function get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Session has no data with key "' . $key . '".');
+        return null;
     }
     
     public function destroy() {

@@ -19,7 +19,7 @@ class BaseController {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Controller has no data with key "' . $key . '".');
+        return null;
     }
     
     public function set($key, $val) {
@@ -30,7 +30,7 @@ class BaseController {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Controller has no data with key "' . $key . '".');
+        return null;
     }
     
     protected function redirect($url, $httpCode=302) {

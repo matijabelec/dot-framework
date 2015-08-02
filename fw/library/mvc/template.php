@@ -23,7 +23,7 @@ class Template {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Template has no data with key "' . $key . '".');
+        return null;
     }
     
     public function set($key, $val) {
@@ -34,7 +34,7 @@ class Template {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Template has no data with key "' . $key . '".');
+        return null;
     }
     
     public function output($safe=true) {

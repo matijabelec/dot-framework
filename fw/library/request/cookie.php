@@ -4,7 +4,11 @@ class Cookie {
     private static $instance;
     private $storage;
     
-    private function __construct() {}
+    private function __construct() {
+        foreach($_COOKIE as $name=>&$val) {
+            $this->set($name, $val);
+        }
+    }
     
     public static function getInstance() {
         if(!self::$instance instanceof self) {
@@ -43,11 +47,15 @@ class Cookie {
         unset($this->storage[$key]);
     }
     
+    public function __isset($key) {
+        return isset($this->storage[$key]);
+    }
+    
     public function __get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Cookie has no data with key "' . $key . '".');
+        return null;
     }
     
     public function set($key, 
@@ -59,17 +67,10 @@ class Cookie {
                                $httponly = false) {
         if(isset($domain) && !is_null($domain) ) {
             setcookie($key, $value, time()+$expire, $path, $domain, $secure, $httponly);
-            $this->storage[$key] = ['value' => $value,
-                                'expire' => $expire,
-                                'path' => $path,
-                                'domain' => $domain,
-                                'secure' => $secure,
-                                'httponly' => $httponly];
+            $this->storage[$key] = $value;
         } else {
             setcookie($key, $value, time()+$expire, $path);
-            $this->storage[$key] = ['value' => $value,
-                                'expire' => $expire,
-                                'path' => $path];
+            $this->storage[$key] = $value;
         }
     }
     public function setRaw($key, 
@@ -81,27 +82,18 @@ class Cookie {
                                $httponly = false) {
         if(isset($domain) && !is_null($domain) ) {
             setrawcookie($key, $value, time()+$expire, $path, $domain, $secure, $httponly);
-            $this->storage[$key] = ['value' => $value,
-                                'expire' => $expire,
-                                'path' => $path,
-                                'domain' => $domain,
-                                'secure' => $secure,
-                                'httponly' => $httponly,
-                                'raw' => true];
+            $this->storage[$key] = $value;
         } else {
             setrawcookie($key, $value, time()+$expire, $path);
-            $this->storage[$key] = ['value' => $value,
-                                'expire' => $expire,
-                                'path' => $path,
-                                'raw' => true];
+            $this->storage[$key] = $value;
         }
     }
     
-    public static function get($key) {
+    public function get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Cookie has no data with key "' . $key . '".');
+        return null;
     }
 }
 

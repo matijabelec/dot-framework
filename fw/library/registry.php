@@ -21,7 +21,7 @@ class Registry {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Registry has no data with key "' . $key . '".');
+        return null;
     }
 }
 

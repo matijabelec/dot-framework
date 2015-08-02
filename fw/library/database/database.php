@@ -33,7 +33,7 @@ class Database {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('Database has no data with key "' . $key . '".');
+        return null;
     }
     
     protected function connect() {

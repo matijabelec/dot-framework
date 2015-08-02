@@ -19,7 +19,7 @@ class BaseView {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('View has no data with key "' . $key . '".');
+        return null;
     }
     
     public function set($key, $val) {
@@ -30,7 +30,7 @@ class BaseView {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        throw new Exception('View has no data with key "' . $key . '".');
+        return null;
     }
     
     final protected function checkInstance($key, $class) {
