@@ -4,7 +4,7 @@ class IndexModel extends BaseModel implements iListable {
     protected $page;
     
     public function setPage($page) {
-        $this->db = Database::getInstance();
+        $this->db = new Database;
         $this->page = $page;
     }
     
@@ -13,6 +13,8 @@ class IndexModel extends BaseModel implements iListable {
     }
     
     public function getData() {
+        print_r($this->db);
+        
         $records = $this->db->query('SELECT * FROM articles_view');
         foreach($records as $record)
             echo '<pre>' . print_r($record, 1) . '</pre>';

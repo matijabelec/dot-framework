@@ -44,6 +44,7 @@ require_once(FW_LIBRARY . 'registry.php');
 require_once(FW_LIBRARY . 'request.php');
 require_once(FW_LIBRARY . 'router.php');
 require_once(FW_LIBRARY . 'load.php');
+require_once(FW_LIBRARY . 'databasepdoconnection.php');
 require_once(FW_LIBRARY . 'database.php');
 require_once(FW_LIBRARY . 'template.php');
 require_once(FW_LIBRARY . 'model.php');
