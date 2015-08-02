@@ -1,11 +1,19 @@
 <?php
 
-/*
+/**
  * Set production or development environment
  * 
  * @var [DEV|PROD]
  */
 define('ENVIRONMENT', 'DEV');
+
+/*
+ * Database connection data
+ */
+define('DB_HOSTNAME', 'localhost');
+define('DB_DATABASE', 'recenicadvije');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'belec');
 
 /**
  * Used in Router::route to remove first N parameters.
@@ -36,6 +44,7 @@ require_once(FW_LIBRARY . 'registry.php');
 require_once(FW_LIBRARY . 'request.php');
 require_once(FW_LIBRARY . 'router.php');
 require_once(FW_LIBRARY . 'load.php');
+require_once(FW_LIBRARY . 'database.php');
 require_once(FW_LIBRARY . 'template.php');
 require_once(FW_LIBRARY . 'model.php');
 require_once(FW_LIBRARY . 'controller.php');
