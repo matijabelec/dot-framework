@@ -2,11 +2,11 @@
 
 class Router {
     public static function route(Request $request) {
-        $controller = $request->getController() . 'Controller';
+        $controller = ucfirst($request->getController() ) . 'Controller';
         $action = $request->getAction() . 'Action';
         $args = $request->getArgs();
         
-        $file = APP_CONTROLLERS . $controller . '.php';
+        $file = APP_CONTROLLERS . strtolower($controller) . '.php';
         if(is_readable($file) ) {
             require_once($file);
             if(class_exists($controller) ) {
@@ -22,8 +22,8 @@ class Router {
             }
         }
         
-        throw new Exception('Controller "' . $request->getController() . '"' . 
-                            ' or action "' . $request->getAction() . '" not found.');
+        throw new Exception('Controller "' . $request->getController() . 'Controller"' . 
+                            ' or action "' . $request->getAction() . 'Action" not found.');
     }
 }
 

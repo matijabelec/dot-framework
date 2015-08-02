@@ -2,9 +2,9 @@
 
 class Load {
     public function model($name) {
-        $model = $name . 'Model';
+        $model = ucfirst($name) . 'Model';
         
-        $file = APP_MODELS . $name . '.php';
+        $file = APP_MODELS . strtolower($model) . '.php';
         if(is_readable($file) ) {
             require_once($file);
             
@@ -13,13 +13,13 @@ class Load {
             }
         }
         
-        return false;
+        throw new Exception('Model "' . $model . '" does not exists or cannot be loaded.');
     }
     
     public function view($name) {
-        $view = $name . 'View';
+        $view = ucfirst($name) . 'View';
         
-        $file = APP_VIEWS . $name . '.php';
+        $file = APP_VIEWS . strtolower($view) . '.php';
         if(is_readable($file) ) {
             require_once($file);
             
@@ -27,14 +27,13 @@ class Load {
                 return new $view;
             }
         }
-        
-        return false;
+        throw new Exception('View "' . $view . '" does not exists or cannot be loaded.');
     }
     
     public function controller($name) {
-        $controller = $name . 'Controller';
+        $controller = ucfirst($name) . 'Controller';
         
-        $file = APP_VIEWS . $name . '.php';
+        $file = APP_VIEWS . strtolower($controller) . '.php';
         if(is_readable($file) ) {
             require_once($file);
             
@@ -43,18 +42,19 @@ class Load {
             }
         }
         
-        return false;
+        throw new Exception('Controller "' . $controller . '" does not exists or cannot be loaded.');
     }
     
-    public function template($name) {
-        $template = $name;
-        
-        $file = APP_TEMPLATES . $template . '.tpl';
-        if(is_readable($file) ) {
-            return file_get_contents($file);
+    public function template($template, $inline=false) {
+        if($inline == false) {
+            $file = APP_TEMPLATES . $template . '.tpl';
+            if(is_readable($file) ) {
+                return new Template(file_get_contents($file) );
+            }
+        } else {
+            return new Template($template);
         }
-        
-        return false;
+        throw new Exception('Template "' . $template . '" does not exists or cannot be loaded.');
     }
 }
 

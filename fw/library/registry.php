@@ -13,15 +13,15 @@ class Registry {
         return self::$instance;
     }
     
-    public function set($key, $val) {
+    public function __set($key, $val) {
         $this->storage[$key] = $val;
     }
     
-    public function get($key) {
+    public function __get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
         }
-        return false;
+        throw new Exception('Registry has no data with key "' . $key . '".');
     }
 }
 
