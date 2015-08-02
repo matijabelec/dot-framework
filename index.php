@@ -40,6 +40,7 @@ require_once(FW_LIBRARY . 'template.php');
 require_once(FW_LIBRARY . 'model.php');
 require_once(FW_LIBRARY . 'controller.php');
 require_once(FW_LIBRARY . 'view.php');
+require_once(ROOT_APP . 'includes.php');
 
 /*
  * prepare error_reporting
