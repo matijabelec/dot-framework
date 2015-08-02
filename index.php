@@ -24,8 +24,9 @@ require_once(ROOT . 'fw/library/database/database.php');
 
 require_once(ROOT . 'fw/library/mvc/template.php');
 require_once(ROOT . 'fw/library/mvc/model.php');
-require_once(ROOT . 'fw/library/mvc/controller.php');
 require_once(ROOT . 'fw/library/mvc/view.php');
+require_once(ROOT . 'fw/library/mvc/controller.php');
+require_once(ROOT . 'fw/library/mvc/multilangcontroller.php');
 
 require_once(ROOT . 'fw/library/router.php');
 
