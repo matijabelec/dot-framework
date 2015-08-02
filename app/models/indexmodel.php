@@ -13,8 +13,6 @@ class IndexModel extends BaseModel implements iListable {
     }
     
     public function getData() {
-        print_r($this->db);
-        
         $records = $this->db->query('SELECT * FROM articles_view');
         foreach($records as $record)
             echo '<pre>' . print_r($record, 1) . '</pre>';
