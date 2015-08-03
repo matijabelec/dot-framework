@@ -1,11 +1,22 @@
 <?php
 
 /**
+ * Main configuration file in Dot-framework
+ * 
+ * PHP version 5
+ * 
+ * LICENSE: 
+ *
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
+
+/**
  * Set production or development environment
  * 
- * @var string 'DEV'|'PROD' represents what type of
- *                          environement is currently 
- *                          active
+ * @var string 'DEV'|'PROD' represents what type of environement is 
+ *                          currently active
  */
 define('ENVIRONMENT', 'DEV');
 
@@ -15,8 +26,7 @@ define('ENVIRONMENT', 'DEV');
  * (useful if script is not in root directory (usualy
  * public_html) of web server).
  * 
- * @var integer in range 0-N, represent index of first 
- *              parameter
+ * @var integer in range 0-N, represent index of first parameter
  */
 define('REQUEST_FIRST_PARAM', 1);
 
@@ -33,6 +43,7 @@ define('DEFAULT_SESSION_NAME', 'SESS_DFW_UNK');
  * 
  * Primarily language cookie config's.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 /**
  * Used if website provides content in more than one language.
  * It sets new language cookie (defined by data lower in this
@@ -44,8 +55,8 @@ define('DEFAULT_SESSION_NAME', 'SESS_DFW_UNK');
 define('MULTILANG', true);
 
 /**
- * Used in MultilangBaseController as default language
- * to set in cookie if no language cookie found.
+ * Used in MultilangBaseController as default language to set in 
+ * cookie if no language cookie found.
  * 
  * @var string represents short language code
  */

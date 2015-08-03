@@ -32,9 +32,9 @@ class Load {
     /**
      * Used to load a model.
      * 
-     * @param string    $arg1 an string representing name of model
-     * @return BaseModel an exception is thrown if file is not 
-     *                   readable or class not found
+     * @param string $name an string representing name of model
+     * @return BaseModel an exception is thrown if file is not readable or 
+     *                   class not found
      * @access public
      */
     public function model($name) {
@@ -55,9 +55,9 @@ class Load {
     /**
      * Used to load a view.
      * 
-     * @param string    $arg1 an string representing name of view
-     * @return BaseView an exception is thrown if file is not 
-     *                  readable or class not found
+     * @param string $name an string representing name of view
+     * @return BaseView an exception is thrown if file is not readable or 
+     *                  class not found
      * @access public
      */
     public function view($name) {
@@ -77,10 +77,9 @@ class Load {
     /**
      * Used to load a controller.
      * 
-     * @param string    $arg1 an string representing name of 
-     *                        controller
-     * @return BaseController an exception is thrown if file is 
-     *                        not readable or class not found
+     * @param string $name an string representing name of controller
+     * @return BaseController an exception is thrown if file is not 
+     *                        readable or class not found
      * @access public
      */
     public function controller($name) {
@@ -101,12 +100,10 @@ class Load {
     /**
      * Used to load a template.
      * 
-     * @param string    $arg1 an string representing name of 
-     *                        template or template string
-     * @param boolean    $arg2 set to true if template string
-     *                         is used
-     * @return Template an exception is thrown if file is not 
-     *                  readable
+     * @param string $template an string representing name of template 
+     *               or template string
+     * @param boolean $inline set to true if template string is used
+     * @return Template an exception is thrown if file is not readable
      * @access public
      */
     public function template($template, $inline=false) {
@@ -125,9 +122,8 @@ class Load {
     /**
      * Used to load a multilangfile (.mlf).
      * 
-     * @param string    $arg1 an string representing name of mlf
-     * @return MultilangFile an exception is thrown if file is 
-     *                       not readable
+     * @param string $mlf an string representing name of mlf
+     * @return MultilangFile an exception is thrown if file is not readable 
      * @access public
      */
     public function multilangFile($mlf) {
