@@ -19,12 +19,11 @@ class IndexController extends BaseController {
         echo $view->render();
     }
     
-    public function langAction($arg) {
+    public function langAction($id=1, $key='test') {
         $translate = Translate::getInstance();
         
-        $id = 1;
-        if(isset($arg[0]) && is_numeric($arg[0]) )
-            $id = $arg[0];
+        if(!is_numeric($id) )
+            $id = 1;
         
         $string = $translate->byId(['title'=>$id]);
         print_r($string);
@@ -32,6 +31,18 @@ class IndexController extends BaseController {
         echo '<br>';
         
         $string = $translate->byId($id);
+        print_r($string);
+        
+        
+        
+        echo '<br>';
+        
+        $string = $translate->byKey([$key]);
+        print_r($string);
+        
+        echo '<br>';
+        
+        $string = $translate->byKey($key);
         print_r($string);
     }
 }
