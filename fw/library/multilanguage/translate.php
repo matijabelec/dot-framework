@@ -143,16 +143,16 @@ class Translate {
      */
     public function byKey($key, $failBack=true) {
         if(is_array($key) ) {
-            $sql = 'SELECT * FROM `dfw_ml_values` WHERE id = :id AND lang = :lang';
+            $sql = 'SELECT * FROM `dfw_ml_values` WHERE `key` = :key AND `lang` = :lang';
             foreach($key as $k=>&$v) {
-                $res = $this->db->query($sql, ['id'=>$v, 'lang'=>$this->registry->language]);
+                $res = $this->db->query($sql, ['key'=>$v, 'lang'=>$this->registry->language]);
                 if(count($res) == 1) {
                     $v = $res[0]['value'];
                 } else {
                     if($failBack == false) {
                         $v = '?';
                     } else {
-                        $res = $this->db->query($sql, ['id'=>$v, 'lang'=>$this->failbackLanguage]);
+                        $res = $this->db->query($sql, ['key'=>$v, 'lang'=>$this->failbackLanguage]);
                         if(count($res) == 1) {
                             $v = $res[0]['value'];
                         } else {
@@ -163,15 +163,15 @@ class Translate {
             }
             return $key;
         } else if(is_string($key) ) {
-            $sql = 'SELECT * FROM `dfw_ml_values` WHERE id = :id AND lang = :lang';
-            $res = $this->db->query($sql, ['id'=>$key, 'lang'=>$this->registry->language]);
+            $sql = 'SELECT * FROM `dfw_ml_values` WHERE `key` = :key AND `lang` = :lang';
+            $res = $this->db->query($sql, ['key'=>$key, 'lang'=>$this->registry->language]);
             if(count($res) == 1) {
                 return $res[0]['value'];
             } else {
                 if($failBack == false) {
                     return '?';
                 } else {
-                    $res = $this->db->query($sql, ['id'=>$key, 'lang'=>$this->failbackLanguage]);
+                    $res = $this->db->query($sql, ['key'=>$key, 'lang'=>$this->failbackLanguage]);
                     if(count($res) == 1) {
                         return $res[0]['value'];
                     } else {
