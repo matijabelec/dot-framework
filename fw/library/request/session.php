@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * Session class file
+ * 
+ * PHP version 5
+ * 
+ * LICENSE: 
+ *
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
+
+/**
+ * Class used to work with session
+ * 
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
 class Session {
     private static $instance;
     private static $name;

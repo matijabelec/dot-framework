@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * BaseModel class file
+ * 
+ * PHP version 5
+ * 
+ * LICENSE: 
+ *
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
+
+/**
+ * Class which represents a base model in MVC
+ * 
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
 class BaseModel {
     protected $registry;
     protected $load;

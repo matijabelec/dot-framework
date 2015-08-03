@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * DatabasePDOConnection class file
+ * 
+ * PHP version 5
+ * 
+ * LICENSE: 
+ *
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
+
+/**
+ * Class used to work with database with PDO
+ * 
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
 class DatabasePDOConnection {
     private static $instance;
     private static $conn = null;

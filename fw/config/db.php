@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Database configuration file in Dot-framework
+ * Database configuration file
  * 
  * PHP version 5
  * 

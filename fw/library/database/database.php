@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * Database class file
+ * 
+ * PHP version 5
+ * 
+ * LICENSE: 
+ *
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
+
+/**
+ * Class used to work with database
+ * 
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
 class Database {
     private static $instance;
     private $storage;

@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * BaseView class file
+ * 
+ * PHP version 5
+ * 
+ * LICENSE: 
+ *
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
+
+/**
+ * Class which represents a base view in MVC
+ * 
+ * @author      Matija Belec <matijabelec1@gmail.com>
+ * @copyright   2015 Matija Belec
+ * @license     
+ */
 class BaseView {
     protected $registry;
     protected $load;
