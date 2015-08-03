@@ -1,7 +1,7 @@
 <?php
 
 class IndexView extends BaseView {
-    public function output() {
+    public function render() {
         $this->checkInstance($this->template, 'Template');
         
         return $this->template->output();

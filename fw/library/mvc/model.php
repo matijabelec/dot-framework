@@ -20,11 +20,30 @@
  * @license     
  */
 class BaseModel {
+    
+    /**
+     * @var Registry
+     * @access protected
+     */
     protected $registry;
+    
+    /**
+     * @var Load
+     * @access protected
+     */
     protected $load;
     
+    /**
+     * @var array
+     * @access private
+     */
     private $storage;
     
+    /**
+     * Default constructor used to set registry and load properties
+     * 
+     * @access public
+     */
     public function __construct() {
         $this->registry = Registry::getInstance();
         $this->load = new Load;

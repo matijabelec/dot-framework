@@ -89,7 +89,7 @@ if(MULTILANG == true) {
         /* 
          * If it is not set, then set new language cookie with DEFAULT_LANGUAGE.
          */
-        Cookie::getInstance()->set(DEFAULT_LANG_COOKIE_NAME, DEFAULT_LANGUAGE, 86400*30, '/');
+        Cookie::getInstance()->set(DEFAULT_LANG_COOKIE_NAME, DEFAULT_LANGUAGE, Cookie::TIME_MONTH, '/');
     }
     
     /*

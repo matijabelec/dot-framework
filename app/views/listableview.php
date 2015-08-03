@@ -1,7 +1,7 @@
 <?php
 
 class ListableView extends BaseView {
-    public function output() {
+    public function render() {
         $this->checkInstance($this->model, 'iListable');
         $this->checkInstance($this->template, 'Template');
         

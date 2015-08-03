@@ -15,9 +15,8 @@ class IndexController extends BaseController {
         $view->template = $this->load->template('test-2');
         $view->template->viewer1 = $lview;
         
-        $page = $view->output();
         
-        echo $page;
+        echo $view->render();
     }
 }
 

@@ -135,14 +135,14 @@ class Template {
                     /*
                      * Check if key is set (key is $m[1]), if key is found then check if value is view or 
                      * string.
-                     * If value is view then trigger view's output method (force view to render), or, if 
+                     * If value is view then trigger view's render method (force view to render), or, if 
                      * value is string, just return value.
                      * If key is not found then $value will get value of empty string (this is standard 
                      * behaviour if $safe is set to true).
                      */
                     if(isset($this->storage[$m[1] ]) ) {
                         $value = is_a($this->storage[$m[1] ], 'BaseView') ? 
-                                        $this->storage[$m[1] ]->output() : 
+                                        $this->storage[$m[1] ]->render() : 
                                         $this->storage[$m[1] ];
                     } else {
                         $value = '';
@@ -163,7 +163,7 @@ class Template {
                     
                     /*
                      * Check if key is set, if it is set, further check is needed.
-                     * If value is view then force render of view (call view's method output to produce 
+                     * If value is view then force render of view (call view's method render to produce 
                      * rendered view).
                      * If value is not view then it is a string so value will be returned as is.
                      * There is third option: key is not set, in which case key remains same ($m[0] is 
@@ -171,7 +171,7 @@ class Template {
                      */
                     if(isset($this->storage[$m[1] ]) ) {
                         $value = is_a($this->storage[$m[1] ], 'BaseView') ? 
-                                        $this->storage[$m[1] ]->output() : 
+                                        $this->storage[$m[1] ]->render() : 
                                         $this->storage[$m[1] ];
                     } else {
                         $value = $m[0];
