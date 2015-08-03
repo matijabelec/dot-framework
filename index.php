@@ -58,7 +58,7 @@ require_once(ROOT . 'fw/library/request/session.php');
 require_once(ROOT . 'fw/library/database/databasepdoconnection.php');
 require_once(ROOT . 'fw/library/database/database.php');
 
-require_once(ROOT . 'fw/library/multilanguage/multilangfile.php');
+require_once(ROOT . 'fw/library/multilanguage/translate.php');
 
 require_once(ROOT . 'fw/library/mvc/template.php');
 require_once(ROOT . 'fw/library/mvc/model.php');
