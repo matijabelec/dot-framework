@@ -49,10 +49,24 @@ class BaseModel {
         $this->load = new Load;
     }
     
+    /**
+     * Used to set property
+     * 
+     * @param string $key 
+     * @param mixed $val 
+     * @access public
+     */
     public function __set($key, $val) {
         $this->storage[$key] = $val;
     }
     
+    /**
+     * Used to get property
+     * 
+     * @param string $key 
+     * @return mixed|null
+     * @access public
+     */
     public function __get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
@@ -60,10 +74,24 @@ class BaseModel {
         return null;
     }
     
+    /**
+     * Used to set property
+     * 
+     * @param string $key 
+     * @param mixed $val 
+     * @access public
+     */
     public function set($key, $val) {
         $this->storage[$key] = $val;
     }
     
+    /**
+     * Used to get property
+     * 
+     * @param string $key 
+     * @return mixed|null
+     * @access public
+     */
     public function get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];

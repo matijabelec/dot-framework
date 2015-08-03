@@ -49,10 +49,24 @@ class BaseController {
         $this->load = new Load;
     }
     
+    /**
+     * Used to set property
+     * 
+     * @param string $key 
+     * @param mixed $val 
+     * @access public
+     */
     public function __set($key, $val) {
         $this->storage[$key] = $val;
     }
     
+    /**
+     * Used to get property
+     * 
+     * @param string $key 
+     * @return mixed|null
+     * @access public
+     */
     public function __get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
@@ -60,10 +74,24 @@ class BaseController {
         return null;
     }
     
+    /**
+     * Used to set property
+     * 
+     * @param string $key 
+     * @param mixed $val 
+     * @access public
+     */
     public function set($key, $val) {
         $this->storage[$key] = $val;
     }
     
+    /**
+     * Used to get property
+     * 
+     * @param string $key 
+     * @return mixed|null
+     * @access public
+     */
     public function get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
@@ -71,6 +99,13 @@ class BaseController {
         return null;
     }
     
+    /**
+     * Used to redirect to new url
+     * 
+     * @param string $url 
+     * @param integer $httpCode 
+     * @access protected
+     */
     protected function redirect($url, $httpCode=302) {
         header('Location: ' . $url, true, $httpCode);
         die('<p><a href="' . $url . '">Click here</a>if not redirrected.</p>');

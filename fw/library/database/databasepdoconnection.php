@@ -20,10 +20,32 @@
  * @license     
  */
 class DatabasePDOConnection {
-    private static $instance;
-    private static $conn = null;
-    protected $storage;
     
+    /**
+     * @var DatabasePDOConnection
+     * @access private
+     * @static
+     */
+    private static $instance;
+    
+    /**
+     * @var PDOConnection|null
+     * @access private
+     * @static
+     */
+    private static $conn = null;
+    
+    /**
+     * @var array
+     * @access private
+     */
+    private $storage;
+    
+    /**
+     * Constructor is private. Class is singleton
+     * 
+     * @access private
+     */
     private function __construct() {
         $this->charset = 'utf8';
         $this->hostname = DB_HOSTNAME;
@@ -32,6 +54,13 @@ class DatabasePDOConnection {
         $this->password = DB_PASSWORD;
     }
     
+    /**
+     * Used to get an instance of class
+     * 
+     * @return DatabasePDOConnection
+     * @access public
+     * @static
+     */
     public static function getInstance() {
         if(!self::$instance instanceof self) {
             self::$instance = new DatabasePDOConnection;
@@ -39,10 +68,24 @@ class DatabasePDOConnection {
         return self::$instance;
     }
     
+    /**
+     * Used to set properties
+     * 
+     * @param string $key 
+     * @param mixed $val 
+     * @access public
+     */
     public function __set($key, $val) {
         $this->storage[$key] = $val;
     }
     
+    /**
+     * Used to get value of property
+     * 
+     * @param string $key 
+     * @return mixed|null 
+     * @access public
+     */
     public function __get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
@@ -50,6 +93,12 @@ class DatabasePDOConnection {
         return null;
     }
     
+    /**
+     * Used to connect to database
+     * 
+     * @return PDOConnection or exception if PDOException occured
+     * @access public
+     */
     public function connect() {
         if(is_null(self::$conn) ) {
             try {
@@ -65,10 +114,23 @@ class DatabasePDOConnection {
         return self::$conn;
     }
     
+    /**
+     * Used to disconnect from database
+     * 
+     * @access public
+     */
     public function disconnect() {
         self::$conn = null;
     }
     
+    /**
+     * Used to run a query on database
+     * 
+     * @param string $sql representing query 
+     * @param array $args representing list of arguments
+     * @return array an array which represents returned data from query or exception if sql or args not valid
+     * @access public
+     */
     public function query($sql, $args=[]) {
         if(!isset($sql) )
             throw new Exception('Database query requires sql to be set.');
@@ -85,6 +147,14 @@ class DatabasePDOConnection {
         return $res;
     }
     
+    /**
+     * Used to run a query on database
+     * 
+     * @param string $sql representing query 
+     * @param array $args representing list of arguments
+     * @return integer represents number of modified rows or exception if sql or args not valid
+     * @access public
+     */
     public function update($sql, $args=[]) {
         if(!isset($sql) )
             throw new Exception('Database query(update) requires sql to be set.');

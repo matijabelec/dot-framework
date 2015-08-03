@@ -20,16 +20,33 @@
  * @license     
  */
 class Database {
+    
+    /**
+     * @var Database
+     * @access private
+     * @static
+     */
     private static $instance;
+    
+    /**
+     * @var array
+     * @access private
+     */
     private $storage;
     
+    /**
+     * @var DatabasePDOConnection
+     * @access private
+     * @static
+     */
     private static $dbc;
     
-    protected $registry;
-    
+    /**
+     * Constructor used to set default values
+     * 
+     * @access public
+     */
     public function __construct() {
-        $this->registry = Registry::getInstance();
-        
         $this->charset = 'utf8';
         $this->hostname = DB_HOSTNAME;
         $this->database = DB_DATABASE;
@@ -44,10 +61,24 @@ class Database {
         self::$dbc->password = $this->password;
     }
     
+    /**
+     * Used to set properties
+     * 
+     * @param string $key 
+     * @param mixed $val 
+     * @access public
+     */
     public function __set($key, $val) {
         $this->storage[$key] = $val;
     }
     
+    /**
+     * Used to get value of property
+     * 
+     * @param string $key 
+     * @return mixed|null 
+     * @access public
+     */
     public function __get($key) {
         if(isset($this->storage[$key]) ) {
             return $this->storage[$key];
@@ -55,6 +86,11 @@ class Database {
         return null;
     }
     
+    /**
+     * Used to connect to database
+     * 
+     * @access protected 
+     */
     protected function connect() {
         self::$dbc->charset = $this->charset;
         self::$dbc->hostname = $this->hostname;
@@ -64,14 +100,35 @@ class Database {
         self::$dbc->connect();
     }
     
+    /**
+     * Used to disconnect from database
+     * 
+     * @access protected
+     */
     protected function disconnect() {
         self::$dbc->disconnect();
     }
     
+    /**
+     * Used to run a query on database
+     * 
+     * @param string $sql representing query 
+     * @param array $args representing list of arguments
+     * @return array an array which represents returned data from query
+     * @access public
+     */
     public function query($sql, $args=[]) {
         return self::$dbc->query($sql, $args);
     }
     
+    /**
+     * Used to run a query on database
+     * 
+     * @param string $sql representing query 
+     * @param array $args representing list of arguments
+     * @return integer represents number of modified rows
+     * @access public
+     */
     public function update($sql, $args=[]) {
         return self::$dbc->update($sql, $args);
     }
