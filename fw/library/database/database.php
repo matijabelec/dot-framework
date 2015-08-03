@@ -22,13 +22,6 @@
 class Database {
     
     /**
-     * @var Database
-     * @access private
-     * @static
-     */
-    private static $instance;
-    
-    /**
      * @var array
      * @access private
      */

@@ -22,7 +22,7 @@ define('DB_HOSTNAME', 'localhost');
  * Database name
  * @var string represents database name
  */
-define('DB_DATABASE', 'recenicadvije');
+define('DB_DATABASE', 'dotfw_lang');
 
 /**
  * Database username
