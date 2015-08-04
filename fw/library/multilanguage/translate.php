@@ -181,6 +181,57 @@ class Translate {
             }
         }
     }
+    
+    /**
+     * Used to add new key (item) in multilanguage items table
+     * 
+     * @param string|null $key represents key to use in query (if null then key will be NULL)
+     * @return integer|false returns id of table item added or false if error occured (ex. key already 
+     *                       exists)
+     * @access public
+     */
+    public function addKey($key=null) {
+        $db = $this->db->connect();
+        if(!is_null($key) ) {
+            if($this->db->update('INSERT INTO `dfw_ml_items`(`key`) VALUES(:key)', ['key'=>$key]) ) {
+                return $db->lastInsertId();
+            }
+        } else {
+            if($this->db->update('INSERT INTO `dfw_ml_items`(`key`) VALUES(NULL)') ) {
+                return $db->lastInsertId();
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Used to add translation string to key (item) in multilanguage string table
+     * 
+     * @param integer $id 
+     * @param string $language represents language code (2 lowercase characters) 
+     * @param string $value 
+     * @return boolean represents success
+     * @access public
+     */
+    public function addTranslationById($id, $language, $value) {
+        $sql = 'INSERT INTO `dfw_ml_strings`(`item`, `lang_code`, `value`) VALUES(:id, :lang, :value)';
+        return $this->db->update($sql, ['id'=>$id, 'lang'=>$language, 'value'=>$value]);
+    }
+    
+    /**
+     * Used to add translation string to selected key in multilanguage string table
+     * 
+     * @param string $key represents key of item 
+     * @param string $language represents language code (2 lowercase characters)
+     * @param string $value 
+     * @return boolean represents success
+     * @access public
+     */
+    public function addTranslationByKey($key, $language, $value) {
+        $sql = 'INSERT INTO `dfw_ml_strings`(`item`, `lang_code`, `value`) VALUES(' . 
+               '(SELECT `id` FROM `dfw_ml_items` WHERE `key` = :key LIMIT 1), :lang, :value)';
+        return $this->db->update($sql, ['key'=>$key, 'lang'=>$language, 'value'=>$value]);
+    }
 }
 
 ?>

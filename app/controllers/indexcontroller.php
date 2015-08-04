@@ -45,6 +45,19 @@ class IndexController extends BaseController {
         $string = $translate->byKey($key);
         print_r($string);
     }
+    
+    public function translateAction() {
+        $translate = Translate::getInstance();
+        $itemId = $translate->addKey('title-123');
+        if($itemId) {
+            $translate->addTranslationById($itemId, 'en', 'Title');
+            $translate->addTranslationByKey('title-123', 'hr', 'Naslov');
+            
+            echo 'translation added';
+        } else {
+            echo 'translation error';
+        }
+    }
 }
 
 ?>
