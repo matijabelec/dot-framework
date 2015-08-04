@@ -82,23 +82,24 @@ class Database {
     /**
      * Used to connect to database
      * 
-     * @access protected 
+     * @return PDOConnection or exception if PDOException occured
+     * @access public 
      */
-    protected function connect() {
+    public function connect() {
         self::$dbc->charset = $this->charset;
         self::$dbc->hostname = $this->hostname;
         self::$dbc->database = $this->database;
         self::$dbc->username = $this->username;
         self::$dbc->password = $this->password;
-        self::$dbc->connect();
+        return self::$dbc->connect();
     }
     
     /**
      * Used to disconnect from database
      * 
-     * @access protected
+     * @access public 
      */
-    protected function disconnect() {
+    public function disconnect() {
         self::$dbc->disconnect();
     }
     

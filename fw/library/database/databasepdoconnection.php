@@ -55,6 +55,16 @@ class DatabasePDOConnection {
     }
     
     /**
+     * Destructor automaticaly disconnects from database
+     * 
+     * Automatically disconnects from database if connection is open.
+     * @access public
+     */
+    public function __destruct() {
+        $this->disconnect();
+    }
+    
+    /**
      * Used to get an instance of class
      * 
      * @return DatabasePDOConnection
@@ -142,7 +152,6 @@ class DatabasePDOConnection {
         $st = $db->prepare($sql);
         $st->execute($args);
         $res = $st->fetchAll(PDO::FETCH_ASSOC);
-        $this->disconnect();
         
         return $res;
     }
@@ -166,7 +175,6 @@ class DatabasePDOConnection {
         $st = $db->prepare($sql);
         $st->execute($args);
         $rowCount = $st->rowCount();
-        $this->disconnect();
         
         return $rowCount;
     }
